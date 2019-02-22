@@ -35,7 +35,7 @@ def backward_derivation_image(image, position, direction):
     # Pega o valor de f(x)
     f_x = image.getpixel(position)
 
-    # Pega o valor de f(x + 1)
+    # Pega o valor de f(x - 1)
     if(direction == 'x'):
         # Caso esteja percorrendo em x
         new_position = list(position)
