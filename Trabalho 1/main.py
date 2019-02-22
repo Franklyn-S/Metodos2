@@ -40,3 +40,5 @@ for x in range(0, height-1):
 # Laço de repetição para utilização do Backward (Todos os pixels da última coluna da imagem)
 for x in range(0, height):
     masc_image.putpixel( (x,width) , derivate.backward_derivation_image(grayscale_image, (x,width), 'y'))
+
+masc_image.save('masc-image.jpg')
