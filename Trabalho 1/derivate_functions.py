@@ -52,11 +52,6 @@ def backward_derivation_image(image, position, direction):
     return abs(f_x - f_x_delta)
 
 def central_derivation_image(image, position, direction):
-    # Pega o valor de f(x)
-     = image.getpixel(position)
-    f_x_delta_backward
-
-    # Pega o valor de f(x - 1)
     if(direction == 'x'):
         # Caso esteja percorrendo em x
         new_position = list(position)
