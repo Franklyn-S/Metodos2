@@ -30,15 +30,15 @@ width, height = masc_image.size
 
 # Laço de repetição para utilização do Forward (Todos os pixels da primeira coluna da imagem)
 for x in range(0, height):
-    masc_image.putpixel( (x,0) , derivate.forward_derivation_image(grayscale_image, (x,0), 'y') )
+    masc_image.putpixel( (x,0) , derivate.forward_derivation_image(grayscale_image, tuple(x,0), 'y') )
 
 # Laço de repetição para utilização do Central (Todos os pixels das colunas e linhas centrais)
 for x in range(0, height-1):
     for y in range(0, width-1):
-        masc_image.putpixel( (x,y) , derivate.central_derivation_image(grayscale_image, (x,y), 'y') )
+        masc_image.putpixel( (x,y) , derivate.central_derivation_image(grayscale_image, tuple(x,y), 'y') )
 
 # Laço de repetição para utilização do Backward (Todos os pixels da última coluna da imagem)
 for x in range(0, height):
-    masc_image.putpixel( (x,width) , derivate.backward_derivation_image(grayscale_image, (x,width), 'y'))
+    masc_image.putpixel( (x,width) , derivate.backward_derivation_image(grayscale_image, tuple(x,width), 'y'))
 
 masc_image.save('masc-image.jpg')
