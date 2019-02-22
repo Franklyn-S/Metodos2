@@ -5,7 +5,8 @@ from PIL import Image # Depois vou fazer o try/catch da importação dessa lib (
 import derivate_functions as derivate
 
 # Abrindo Imagem no Formato 'Image'
-normal_image = Image.open('test-image.jpg')
+normal_image = Image.open('image2.jpg')
+print(normal_image.size)
 # Criando Image em Grayscale
 grayscale_image = normal_image.convert('L')
 
@@ -25,23 +26,35 @@ masc_image = grayscale_image
 # Recebe valor de altura e largura da imagem (último pixel da 'direita' e último pixel de 'baixo')
 
 width, height = masc_image.size
-#print(width, height)
 
 #Trabalhando percorrendo da esquerda pra direita da imagem (percorrendo por colunas)
 
 # Laço de repetição para utilização do Forward (Todos os pixels da primeira coluna da imagem)
-for x in range(0, height-1):
-    masc_image.putpixel( (0,x), derivate.forward_derivation_image(grayscale_image, (0,x), 'x') )
+for h in range(0, height-1):
+    masc_image.putpixel( (0,h), derivate.forward_derivation_image(grayscale_image, (0,h), 'x') )
 
 # Laço de repetição para utilização do Central (Todos os pixels das colunas e linhas centrais)
-for x in range(0, height-1):
-    for y in range(1, width-2):
-        value = derivate.central_derivation_image(grayscale_image, (y,x), 'x')
-        masc_image.putpixel( (y,x),  value)
+for h in range(0, height-1):
+    for w in range(1, width-2):
+        value = derivate.central_derivation_image(grayscale_image, (w,h), 'x')
+        masc_image.putpixel( (w,h),  value)
 
 # Laço de repetição para utilização do Backward (Todos os pixels da última coluna da imagem)
-for x in range(0, height):
-    masc_image.putpixel( (width-1,x) , derivate.backward_derivation_image(grayscale_image, (width-1,x), 'x') )
+for h in range(0, height-1):
+    masc_image.putpixel( (width-1,h) , derivate.backward_derivation_image(grayscale_image, (width-1,h), 'x') )
 
 masc_image.save('masc-image.jpg')
-masc_image.show()
+
+# Cria a imagem aplicando o treshold
+treshimage = masc_image
+treshold = 100
+
+# Percorre todos os pixels verificando o treshold
+for x in range(0, height):
+    for y in range(0, width):
+        if(grayscale_image.getpixel((y,x))>=treshold):
+                treshimage.putpixel( (y,x),  255)
+        else:
+                treshimage.putpixel( (y,x), 0)
+
+treshimage.show()
