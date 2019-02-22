@@ -11,4 +11,11 @@ normal_image = Image.open('test-image.jpg')
 grayscale_image = normal_image.convert('L')
 
 # Salvando a imagem em Grayscale em disco
-grayscale_image.save('test-image-grayscale.jpg')
+# grayscale_image.save('test-image-grayscale.jpg')
+
+# Recebe coordenadas da imagem
+def function(image, position):
+    # Retorna valor do pixel
+    return image.getpixel(position)
+
+print(function(grayscale_image, (0, 0)))
