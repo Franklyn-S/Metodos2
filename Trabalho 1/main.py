@@ -11,4 +11,3 @@ grayscale_image = normal_image.convert('L')
 
 # Salvando a imagem em Grayscale em disco
 grayscale_image.save('test-image-grayscale.jpg')
-
