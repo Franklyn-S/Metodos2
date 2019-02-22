@@ -24,21 +24,21 @@ def function(image, position):
 masc_image = grayscale_image
 
 # Recebe valor de altura e largura da imagem (último pixel da 'direita' e último pixel de 'baixo')
+
 width, height = masc_image.size
 
 #Trabalhando percorrendo da esquerda pra direita da imagem (percorrendo por colunas)
 
 # Laço de repetição para utilização do Forward (Todos os pixels da primeira coluna da imagem)
-for x in range(0, height):
-    masc_image.putpixel( (x,0) , derivate.forward_derivation_image(grayscale_image, tuple(x,0), 'y') )
+for x in range(0, height-1):
+    masc_image.putpixel(tuple([0,x]), derivate.forward_derivation_image(grayscale_image, tuple([0,x]), 'x') )
 
 # Laço de repetição para utilização do Central (Todos os pixels das colunas e linhas centrais)
-for x in range(0, height-1):
+for x in range(0, height):
     for y in range(0, width-1):
-        masc_image.putpixel( (x,y) , derivate.central_derivation_image(grayscale_image, tuple(x,y), 'y') )
-
+        masc_image.putpixel(tuple([y,x]), derivate.central_derivation_image(grayscale_image, tuple([y,x]), 'x') )
 # Laço de repetição para utilização do Backward (Todos os pixels da última coluna da imagem)
 for x in range(0, height):
-    masc_image.putpixel( (x,width) , derivate.backward_derivation_image(grayscale_image, tuple(x,width), 'y'))
+    masc_image.putpixel( tuple([width-1,x]) , derivate.backward_derivation_image(grayscale_image, tuple([width-1,x]), 'x') )
 
 masc_image.save('masc-image.jpg')

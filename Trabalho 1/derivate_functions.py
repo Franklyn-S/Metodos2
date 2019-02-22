@@ -9,6 +9,8 @@ def central_derivation(function, value, delta):
 
 def forward_derivation_image(image, position, direction):
     # Pega o valor de f(x)
+    #print(image.size)
+    #print(position)
     f_x = image.getpixel(position)
 
     # Pega o valor de f(x + 1)
@@ -31,6 +33,8 @@ def forward_derivation_image(image, position, direction):
 
 def backward_derivation_image(image, position, direction):
     # Pega o valor de f(x)
+    #print(image.size)
+    print(position)
     f_x = image.getpixel(position)
 
     # Pega o valor de f(x - 1)
