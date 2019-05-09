@@ -20,7 +20,7 @@ class MetodoPotencia{
         }
 
         float getAutoValor(){
-            return lambdaf;
+            return lambda;
         }
 
         void executar(){
@@ -31,7 +31,7 @@ class MetodoPotencia{
         float * vetor_pot;
         float ** matriz_pot;
         int linha_pot, coluna_pot;
-        float lambdaf,lambdai,erro_pot;
+        float lambda,lambdai,erro_pot;
 
         float * normalize(float * vetor){
             float norma = 0;
@@ -64,23 +64,21 @@ class MetodoPotencia{
         }
 
         void executar_p(){
-            float * vetor_normalized = (float*)malloc(coluna_pot * sizeof(float));
+            float * vetor_normalizado = (float*)malloc(coluna_pot * sizeof(float));
             float * vetor2 = (float*)malloc(coluna_pot * sizeof(float));
-            float * vetor2_normalized = (float*)malloc(coluna_pot * sizeof(float));
+
+            vetor_normalizado = normalize(vetor_pot);
+            vetor2 = mult_matriz_vetor(matriz_pot,vetor_normalizado);
+            lambda = prod_escalar(vetor_normalizado,vetor2);
 
             do{      
-
-                vetor_normalized = normalize(vetor_pot);
-                vetor2 = mult_matriz_vetor(matriz_pot,vetor_normalized);
-                vetor2_normalized = normalize(vetor2);
-                lambdai = prod_escalar(vetor_normalized,vetor2);
-                lambdaf = prod_escalar(vetor2_normalized,mult_matriz_vetor(matriz_pot,vetor2_normalized));
-                vetor_pot = vetor2;
-                
-            }while(fabs((lambdaf - lambdai)/lambdaf)>erro_pot);
-
+                lambdai = lambda;
+                vetor_normalizado = normalize(vetor2);
+                vetor2 = mult_matriz_vetor(matriz_pot,vetor_normalizado);
+                lambda = prod_escalar(vetor_normalizado,vetor2);
+            }while(fabs((lambda - lambdai)/lambda)>erro_pot);
+            vetor_pot = vetor_normalizado;
         }
-
 };
 
 int main(){
@@ -97,19 +95,19 @@ int main(){
     
     float * vetor = (float*)malloc(coluna * sizeof(float));
 
-    matriz[0][0] = 1;
-    matriz[0][1] = 2;
-    matriz[0][2] = 3;
-    matriz[1][0] = 1;
-    matriz[1][1] = 2;
-    matriz[1][2] = 3;
-    matriz[2][0] = 1;
-    matriz[2][1] = 2;
-    matriz[2][2] = 3;
-    vetor[0] = 2;
-    vetor[1] = 2;
-    vetor[2] = 2; 
-    float erro = 0.001;
+    matriz[0][0] = 3;
+    matriz[0][1] = 0;
+    matriz[0][2] = 0;
+    matriz[1][0] = 0;
+    matriz[1][1] = 3;
+    matriz[1][2] = 2;
+    matriz[2][0] = 0;
+    matriz[2][1] = -1;
+    matriz[2][2] = 0;
+    vetor[0] = 1;
+    vetor[1] = 1;
+    vetor[2] = 1; 
+    float erro = 0.000001;
 
     MetodoPotencia instancia(matriz, vetor, erro, linha, coluna);
     instancia.executar();
