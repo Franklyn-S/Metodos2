@@ -74,15 +74,15 @@ tuple<Eigen::MatrixXd, Eigen::MatrixXd> HouseHolder(Eigen::Ref<Eigen::MatrixXd> 
 	MatrixXd H(size, size);
 	H = MatrixXd::Identity(size, size);
 
-	for (int c = 1; c < size-2; i++)
+	for (int c = 1; c < size-2; c++)
 	{
 		MatrixXd Hc(size, size);
 		Hc = mountHouseHolder(A, c, size);
-		ALine = Hc * (ALine * Hc)
-		H = H * Hc 
+		ALine = Hc * (ALine * Hc);
+		H = H * Hc; 
 	}
 
-	return std::make_tuple(ALine / Hc);
+	return std::make_tuple(ALine, H);
 }
 
 int main(){
