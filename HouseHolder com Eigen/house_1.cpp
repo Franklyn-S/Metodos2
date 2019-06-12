@@ -1,4 +1,5 @@
 #include <iostream>
+#include <tuple>
 #include "../eigenLib/Eigen/Dense"
 using namespace Eigen;
 using namespace std;
@@ -6,7 +7,7 @@ using namespace std;
 //g++ -I eigen house_1.cpp -o house
 
 
-Eigen::VectorXd zero(int size){
+Eigen::VectorXd zeros(int size){
 	VectorXd v(size);
 	for (int i = 0; i < size; i++)
 	{
@@ -16,11 +17,12 @@ Eigen::VectorXd zero(int size){
 }
 
 
-Eigen::MatrixXd mountHouseHolder(Eigen::Ref<Eigen::MatrixXd> A, int c, int size){
-	//vetor v <- 0
 
+Eigen::MatrixXd mountHouseHolder(Eigen::Ref<Eigen::MatrixXd> A, int c, int size){
+	
+	//vetor v <- 0
 	VectorXd v(size);
-	v = zero(size);
+	v = zeros(size);
 
 	//v(c+1:n) <- A(c+1:N,c)
 	for (int i = c+1; i < size; i++)
@@ -37,7 +39,7 @@ Eigen::MatrixXd mountHouseHolder(Eigen::Ref<Eigen::MatrixXd> A, int c, int size)
 	}
 	//vetor v' <- 0
 	VectorXd vLine(size);
-	vLine = zero(size);
+	vLine = zeros(size);
 
 	//v'(c+1) <- l_v
 	vLine(c+1) = l_v;
@@ -63,19 +65,41 @@ Eigen::MatrixXd mountHouseHolder(Eigen::Ref<Eigen::MatrixXd> A, int c, int size)
 };
 
 
+//retorna uma matriz tridiagonal e uma matriz acumulada das operações
+tuple<Eigen::MatrixXd, Eigen::MatrixXd> HouseHolder(Eigen::Ref<Eigen::MatrixXd> A, int size){
+	//A' <- A
+	MatrixXd ALine(size, size);
+	ALine = A;
+	//H' = I
+	MatrixXd H(size, size);
+	H = MatrixXd::Identity(size, size);
+
+	for (int c = 1; c < size-2; i++)
+	{
+		MatrixXd Hc(size, size);
+		Hc = mountHouseHolder(A, c, size);
+		ALine = Hc * (ALine * Hc)
+		H = H * Hc 
+	}
+
+	return std::make_tuple(ALine / Hc);
+}
+
 int main(){
 
 	const int size = 3;
-	int c = 1;
 	MatrixXd A(size, size);
 	A <<
 	 1, 2, 3,
      4, 5, 6,
      7, 8, 9; 
-  	MatrixXd H(size, size);
-	H = mountHouseHolder(A, c, size);
 
-	cout << "Matriz HouseHolder" << endl << H << endl;
+    MatrixXd It(size, size);
+  	MatrixXd H(size, size);
+	tie(It,H) = HouseHolder(A, size);
+
+	cout << "Matriz Tridiagonal" << endl << It << endl;
+	cout << "Matriz Acumulada" << endl << H << endl;
 
 	return 0;
 }
