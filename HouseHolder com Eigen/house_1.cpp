@@ -4,7 +4,7 @@
 using namespace Eigen;
 using namespace std;
 
-//g++ -I eigen house_1.cpp -o house
+//g++ -I eigen house_1.cpp -o house -std=c++11
 
 
 Eigen::VectorXd zeros(int size){
