@@ -6,7 +6,7 @@ using namespace std;
 
 //g++ -I eigen house_1.cpp -o house -std=c++11
 
-
+// Creates a vector of zeros
 Eigen::VectorXd zeros(int size){
 	VectorXd v(size);
 	for (int i = 0; i < size; i++)
