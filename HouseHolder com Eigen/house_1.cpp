@@ -45,10 +45,9 @@ Eigen::MatrixXd mountHouseHolder(Eigen::Ref<Eigen::MatrixXd> A, int c, int size)
 	vLine(c+1) = l_v;
 
 	VectorXd N(size);
-
 	N = v - vLine;
 
-	// Construindo vetor n
+	//n <- N/||N||
   	VectorXd n(size);
   	n = N/N.norm();
 
@@ -74,11 +73,12 @@ tuple<Eigen::MatrixXd, Eigen::MatrixXd> HouseHolder(Eigen::Ref<Eigen::MatrixXd> 
 	MatrixXd H(size, size);
 	H = MatrixXd::Identity(size, size);
 
-	for (int c = 1; c < size-2; c++)
-	{
-		MatrixXd Hc(size, size);
-		Hc = mountHouseHolder(A, c, size);
-		ALine = Hc * (ALine * Hc);
+	MatrixXd Hc(size, size);
+	for (int c = 0; c < size-2; c++)
+	{	
+		Hc = mountHouseHolder(ALine, c, size);
+		ALine = Hc * ALine * Hc;
+		//cout << "Matriz " + c << endl << ALine << endl;
 		H = H * Hc; 
 	}
 
@@ -87,12 +87,13 @@ tuple<Eigen::MatrixXd, Eigen::MatrixXd> HouseHolder(Eigen::Ref<Eigen::MatrixXd> 
 
 int main(){
 
-	const int size = 3;
+	const int size = 4;
 	MatrixXd A(size, size);
 	A <<
-	 1, 2, 3,
-     4, 5, 6,
-     7, 8, 9; 
+	 4, 1, -2, -2,
+     1, 2, 0, 1,
+     -2, 0, 3, -2,
+	 2, 1, -2, -1;
 
     MatrixXd It(size, size);
   	MatrixXd H(size, size);
