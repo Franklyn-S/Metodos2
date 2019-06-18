@@ -18,14 +18,17 @@ Eigen::VectorXd zeros(int size){
 
 
 
-Eigen::MatrixXd mountHouseHolder(Eigen::Ref<Eigen::MatrixXd> A, int c, int size){
+Eigen::MatrixXd mountHouseHolder(Eigen::Ref<Eigen::MatrixXd> A, int c){
 	
 	//vetor v <- 0
-	VectorXd v(size);
-	v = zeros(size);
+	int rows = A.rows();
+	int cols = A.cols();
+
+	VectorXd v(rows);
+	v = zeros(rows);
 
 	//v(c+1:n) <- A(c+1:N,c)
-	for (int i = c+1; i < size; i++)
+	for (int i = c+1; i < rows; i++)
 	{
 		v(i) = A(i,c);
 	}
@@ -36,26 +39,26 @@ Eigen::MatrixXd mountHouseHolder(Eigen::Ref<Eigen::MatrixXd> A, int c, int size)
 	if (v(c+1) > 0) l_v = -1*l_v;
 
 	//vetor v' <- 0
-	VectorXd vLine(size);
-	vLine = zeros(size);
+	VectorXd vLine(rows);
+	vLine = zeros(rows);
 
 	//v'(c+1) <- l_v
 	vLine(c+1) = l_v;
 
-	VectorXd N(size);
+	VectorXd N(rows);
 	N = v - vLine;
 
 	//n <- N/||N||
-  	VectorXd n(size);
+  	VectorXd n(rows);
   	n = N/N.norm();
 
 
   	// Construindo Matriz Identidade
-	MatrixXd I(size, size);
-	I = MatrixXd::Identity(size, size);
+	MatrixXd I(rows, cols);
+	I = MatrixXd::Identity(rows, cols);
 
 	// Construindo Matriz H
-	MatrixXd H(size, size);
+	MatrixXd H(rows, cols);
 	H = I - 2*n*n.transpose();
 
 	return H;
@@ -63,18 +66,21 @@ Eigen::MatrixXd mountHouseHolder(Eigen::Ref<Eigen::MatrixXd> A, int c, int size)
 
 
 //retorna uma matriz tridiagonal e uma matriz acumulada das operações
-tuple<Eigen::MatrixXd, Eigen::MatrixXd> HouseHolder(Eigen::Ref<Eigen::MatrixXd> A, int size){
+tuple<Eigen::MatrixXd, Eigen::MatrixXd> HouseHolder(Eigen::Ref<Eigen::MatrixXd> A){
+	
+	int rows = A.rows();
+	int cols = A.cols();
 	//A' <- A
-	MatrixXd ALine(size, size);
+	MatrixXd ALine(rows, cols);
 	ALine = A;
 	//H' = I
-	MatrixXd H(size, size);
-	H = MatrixXd::Identity(size, size);
+	MatrixXd H(rows, cols);
+	H = MatrixXd::Identity(rows, cols);
 
-	MatrixXd Hc(size, size);
-	for (int c = 0; c < size-2; c++)
+	MatrixXd Hc(rows, cols);
+	for (int c = 0; c < rows-2; c++)
 	{	
-		Hc = mountHouseHolder(ALine, c, size);
+		Hc = mountHouseHolder(ALine, c);
 		ALine = Hc * ALine * Hc;
 		//cout << "Matriz " + c << endl << ALine << endl;
 		H = H * Hc; 
@@ -85,17 +91,19 @@ tuple<Eigen::MatrixXd, Eigen::MatrixXd> HouseHolder(Eigen::Ref<Eigen::MatrixXd> 
 
 int main(){
 
-	const int size = 4;
-	MatrixXd A(size, size);
+	MatrixXd A(4, 4);
 	A <<
 	 4, 1, -2, 2,
      1, 2, 0, 1,
      -2, 0, 3, -2,
 	 2, 1, -2, -1;
 
-    MatrixXd It(size, size);
-  	MatrixXd H(size, size);
-	tie(It,H) = HouseHolder(A, size);
+	int rows = A.rows();
+	int cols = A.cols();
+
+    MatrixXd It(rows, cols);
+  	MatrixXd H(rows, cols);
+	tie(It,H) = HouseHolder(A);
 
 	IOFormat CleanFmt(4, 0, ", ", "\n", "│", "│");
 	std::cout << "Matriz Tridiagonal" << endl << It.format(CleanFmt) << endl << endl;
