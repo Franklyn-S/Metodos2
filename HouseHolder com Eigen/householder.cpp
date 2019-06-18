@@ -4,7 +4,7 @@
 using namespace Eigen;
 using namespace std;
 
-//g++ -I eigen house_1.cpp -o house -std=c++11
+//g++ -I eigen householder.cpp -o house -std=c++11 && ./house
 
 // Creates a vector of zeros
 VectorXd zeros(int size){
