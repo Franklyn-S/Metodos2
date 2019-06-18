@@ -4,10 +4,10 @@
 using namespace Eigen;
 using namespace std;
 
-//g++ -I eigen householder.cpp -o house -std=c++11 && ./house
+//g++ -I eigen house_1.cpp -o house -std=c++11
 
 // Creates a vector of zeros
-Eigen::VectorXd zeros(int size){
+VectorXd zeros(int size){
 	VectorXd v(size);
 	for (int i = 0; i < size; i++)
 	{
@@ -18,7 +18,7 @@ Eigen::VectorXd zeros(int size){
 
 
 
-Eigen::MatrixXd mountHouseHolder(Eigen::Ref<Eigen::MatrixXd> A, int c){
+MatrixXd mountHouseHolder(Ref<MatrixXd> A, int c){
 	
 	//vetor v <- 0
 	int rows = A.rows();
@@ -66,7 +66,7 @@ Eigen::MatrixXd mountHouseHolder(Eigen::Ref<Eigen::MatrixXd> A, int c){
 
 
 //retorna uma matriz tridiagonal e uma matriz acumulada das operações
-tuple<Eigen::MatrixXd, Eigen::MatrixXd> HouseHolder(Eigen::Ref<Eigen::MatrixXd> A){
+tuple<MatrixXd, MatrixXd> HouseHolder(Ref<MatrixXd> A){
 	
 	int rows = A.rows();
 	int cols = A.cols();
