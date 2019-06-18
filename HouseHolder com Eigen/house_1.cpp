@@ -93,21 +93,21 @@ int main(){
 
 	MatrixXd A(4, 4);
 	A <<
-	 4, 1, -2, 2,
-     1, 2, 0, 1,
-     -2, 0, 3, -2,
-	 2, 1, -2, -1;
+	4, 1, -2, 2,
+     	1, 2, 0, 1,
+     	-2, 0, 3, -2,
+	2, 1, -2, -1;
 
 	int rows = A.rows();
 	int cols = A.cols();
 
-    MatrixXd It(rows, cols);
+ 	MatrixXd It(rows, cols);
   	MatrixXd H(rows, cols);
 	tie(It,H) = HouseHolder(A);
 
 	IOFormat CleanFmt(4, 0, ", ", "\n", "│", "│");
-	std::cout << "Matriz Tridiagonal" << endl << It.format(CleanFmt) << endl << endl;
-	std::cout << "Matriz Acumulada" << endl << H.format(CleanFmt) << endl << endl;
+	cout << "Matriz Tridiagonal" << endl << It.format(CleanFmt) << endl << endl;
+	cout << "Matriz Acumulada" << endl << H.format(CleanFmt) << endl << endl;
 
 	return 0;
 }
