@@ -31,12 +31,10 @@ Eigen::MatrixXd mountHouseHolder(Eigen::Ref<Eigen::MatrixXd> A, int c, int size)
 	}
 	//l_v <- ||v||
 	double l_v = v.norm();
-
-
 	// Verifica se o elemento abaixo de c é positivo,
 	// se for, muda o sinal da norma de v
 	if (v(c+1) > 0) l_v = -1*l_v;
-	
+
 	//vetor v' <- 0
 	VectorXd vLine(size);
 	vLine = zeros(size);
@@ -65,7 +63,7 @@ Eigen::MatrixXd mountHouseHolder(Eigen::Ref<Eigen::MatrixXd> A, int c, int size)
 
 
 //retorna uma matriz tridiagonal e uma matriz acumulada das operações
-tuple<Eigen::MatrixXd, Eigen::MatrixXd> HouseHolder(Eigen::Ref<Eigen::MatrixXd> A, int size, double error){
+tuple<Eigen::MatrixXd, Eigen::MatrixXd> HouseHolder(Eigen::Ref<Eigen::MatrixXd> A, int size){
 	//A' <- A
 	MatrixXd ALine(size, size);
 	ALine = A;
@@ -74,12 +72,11 @@ tuple<Eigen::MatrixXd, Eigen::MatrixXd> HouseHolder(Eigen::Ref<Eigen::MatrixXd> 
 	H = MatrixXd::Identity(size, size);
 
 	MatrixXd Hc(size, size);
-	for (int c = 0; c < size-2	; c++)
+	for (int c = 0; c < size-2; c++)
 	{	
 		Hc = mountHouseHolder(ALine, c, size);
-		cout << "H  " << endl << Hc << endl << endl;
-		ALine = Hc * ALine * Hc;	
-		cout << "Matriz " << c << endl << ALine << endl << endl;		
+		ALine = Hc * ALine * Hc;
+		//cout << "Matriz " + c << endl << ALine << endl;
 		H = H * Hc; 
 	}
 
@@ -89,28 +86,20 @@ tuple<Eigen::MatrixXd, Eigen::MatrixXd> HouseHolder(Eigen::Ref<Eigen::MatrixXd> 
 int main(){
 
 	const int size = 4;
-	double error = 0.000001;
-	/*
 	MatrixXd A(size, size);
 	A <<
-	 4, 2, -4,
-     2, 10, 4,
-     -4, 4, 9;
-	*/
-	MatrixXd A(size, size);
-	A <<
-	 4, 1, -2,  2,
-     1, 2,  0,  1,
+	 4, 1, -2, 2,
+     1, 2, 0, 1,
      -2, 0, 3, -2,
-     2, 1, -2, -1;
+	 2, 1, -2, -1;
 
     MatrixXd It(size, size);
   	MatrixXd H(size, size);
-	tie(It,H) = HouseHolder(A, size, error);
+	tie(It,H) = HouseHolder(A, size);
 
 	IOFormat CleanFmt(4, 0, ", ", "\n", "│", "│");
-	std::cout << "Matriz Tridiagonal" << endl << It.format(CleanFmt) << endl;
-	std::cout << "Matriz Acumulada" << endl << H.format(CleanFmt) << endl;
+	std::cout << "Matriz Tridiagonal" << endl << It.format(CleanFmt) << endl << endl;
+	std::cout << "Matriz Acumulada" << endl << H.format(CleanFmt) << endl << endl;
 
 	return 0;
 }
