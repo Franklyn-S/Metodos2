@@ -20,10 +20,10 @@ Eigen::VectorXd zeros(int size){
 
 Eigen::MatrixXd mountHouseHolder(Eigen::Ref<Eigen::MatrixXd> A, int c){
 	
-	//vetor v <- 0
 	int rows = A.rows();
 	int cols = A.cols();
-
+	
+	//vetor v <- 0
 	VectorXd v(rows);
 	v = zeros(rows);
 
