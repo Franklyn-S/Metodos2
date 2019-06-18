@@ -108,8 +108,9 @@ int main(){
   	MatrixXd H(size, size);
 	tie(It,H) = HouseHolder(A, size, error);
 
-	cout << "Matriz Tridiagonal" << endl << It << endl;
-	cout << "Matriz Acumulada" << endl << H << endl;
+	IOFormat CleanFmt(4, 0, ", ", "\n", "│", "│");
+	std::cout << "Matriz Tridiagonal" << endl << It.format(CleanFmt) << endl;
+	std::cout << "Matriz Acumulada" << endl << H.format(CleanFmt) << endl;
 
 	return 0;
 }
