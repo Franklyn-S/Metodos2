@@ -8,8 +8,8 @@ using namespace Eigen;
 using namespace std;
 
 //Biblioteca.cpp (Funções Auxiliares)
-VectorXd zeros(int size);
-double error(Ref<MatrixXd> A); 													
+double error(Ref<MatrixXd> A); 	
+VectorXd zeros(int size);												
 MatrixXd montar_Pij(Ref<MatrixXd> A, int i, int j);
 MatrixXd calcular_Pij(Ref<MatrixXd> A, int i, int j);
 
