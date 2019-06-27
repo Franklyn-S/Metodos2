@@ -8,15 +8,18 @@ int main(void){
 
     int tamanho = 3;
 
-    Vector3f vetor_inicial(1,1,1);
+    VectorXf vetor_inicial(tamanho);
+    vetor_inicial << 1,1,1;
     cout << "Vetor inicial" << endl << vetor_inicial << endl;
 
     MatrixXf matriz_inicial(tamanho,tamanho);
-    matriz_inicial << (Matrix3f() << 3,0,0,0,3,2,0,-1,0).finished();
+    matriz_inicial <<   3,0,0,
+                        0,3,2,
+                        0,-1,0;
     cout << "Matriz inicial" << endl << matriz_inicial << endl;
     
     float erro = 0.0000000001;
-    float chute = 2.1;
+    float chute = 2.1; //proximo ao valor do autovalor central
     
 //--------------------------------------------------------------------------------------
 

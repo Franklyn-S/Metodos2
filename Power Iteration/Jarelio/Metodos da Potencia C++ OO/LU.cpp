@@ -5,7 +5,8 @@ VectorXf LU::solve(MatrixXf U, VectorXf b, int n){
     int linha = n;
     int coluna = n;
     MatrixXf L(n,n);
-    L << (Matrix3f() << 1,0,0,0,1,0,0,0,1).finished();
+    
+    L = MatrixXf::Identity(n,n);
 
     VectorXf y(n);
     VectorXf x(n);
