@@ -19,6 +19,7 @@ double error(Ref<MatrixXd> A){
 	return sqrt(soma);
 }
 
+<<<<<<< HEAD
 
 
 
@@ -32,6 +33,16 @@ MatrixXd montar_Pij(Ref<MatrixXd> A, int i, int j){
 
 	double t_aux = atan(A(i,j)/A(j,j));
 	double teta = (A(j,j) == 0) ? (M_PI/4) : t_aux;
+=======
+MatrixXd montar_Pij(Ref<MatrixXd> A, int i, int j){
+  	// Construindo Matriz Identidade
+  	int size  = A.rows();
+	MatrixXd Pij(size, size);
+	Pij = MatrixXd::Identity(size, size);
+
+	double t_aux = atan(A(i,j)/A(j,j));
+	double teta = (A(i,i) == A(j,j)) ? (M_PI/4) : t_aux;
+>>>>>>> f8efb4354de2655a5191aadd35e53fcc4890b79c
 	
 	Pij(i,i) = cos(teta);
 	Pij(j,j) = cos(teta);
@@ -41,6 +52,7 @@ MatrixXd montar_Pij(Ref<MatrixXd> A, int i, int j){
 	return Pij;
 }
 
+<<<<<<< HEAD
 
 MatrixXd calcular_Pij(Ref<MatrixXd> A, int i, int j){
   	// Construindo Matriz Identidade
@@ -48,6 +60,13 @@ MatrixXd calcular_Pij(Ref<MatrixXd> A, int i, int j){
   	int cols  = A.cols();
 	MatrixXd Pij(rows, cols);
 	Pij = MatrixXd::Identity(rows, cols);
+=======
+MatrixXd calcular_Pij(Ref<MatrixXd> A, int i, int j){
+  	// Construindo Matriz Identidade
+  	int size  = A.rows();
+	MatrixXd Pij(size, size);
+	Pij = MatrixXd::Identity(size, size);
+>>>>>>> f8efb4354de2655a5191aadd35e53fcc4890b79c
 
 	double t_aux = (0.5*atan( 2*A(i,j) / (A(j,j)-A(i,i)) ));
 	double teta = (A(i,i) == A(j,j)) ? (M_PI/4) : t_aux;
@@ -58,6 +77,7 @@ MatrixXd calcular_Pij(Ref<MatrixXd> A, int i, int j){
 	Pij(j,i) = -sin(teta);
 	
 	return Pij;
+<<<<<<< HEAD
 
 
 
@@ -104,4 +124,6 @@ MatrixXd ordenar_autovetores(Ref<MatrixXd> Matriz_Valor, Ref<MatrixXd> Matriz_Ve
 
 	return(Matriz_Ordenada);
 
+=======
+>>>>>>> f8efb4354de2655a5191aadd35e53fcc4890b79c
 }

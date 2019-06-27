@@ -8,9 +8,13 @@ tuple<MatrixXd, MatrixXd> jacobi(Ref<MatrixXd> A, double E, Ref<MatrixXd> H){
 	P = MatrixXd::Identity(A.rows(), A.rows());
 	J = H;
 
+<<<<<<< HEAD
 	int MAX_INTERATION = 2000;
 	int i = 0;
 	while(error(A) > E && i < MAX_INTERATION)
+=======
+	while(error(A) > E)
+>>>>>>> f8efb4354de2655a5191aadd35e53fcc4890b79c
 	{
 		for (int j = 0; j < A.rows()-1; ++j)
 		{
@@ -24,7 +28,10 @@ tuple<MatrixXd, MatrixXd> jacobi(Ref<MatrixXd> A, double E, Ref<MatrixXd> H){
 		}
 
 		J = J*P;
+<<<<<<< HEAD
 		i++;
+=======
+>>>>>>> f8efb4354de2655a5191aadd35e53fcc4890b79c
 	}
 
 	return make_tuple(A, J);
