@@ -3,14 +3,12 @@ MatrixXd ordenar_autovetores(Ref<MatrixXd> Matriz_Valor, Ref<MatrixXd> Matriz_Ve
 	int rows = Matriz_Valor.rows();
 	int cols = Matriz_Valor.cols();
 
-
 	VectorXd vetor_diagonal(rows);
 	VectorXd vetor_indice(rows);
 	MatrixXd Matriz_Ordenada(rows,cols);
 
 
-	for (int i = 0; i < rows; ++i)
-	{
+	for (int i = 0; i < rows; ++i){
 		vetor_diagonal(i) = Matriz_Valor(i,i);
 		vetor_indice(i) = i;
 	}
