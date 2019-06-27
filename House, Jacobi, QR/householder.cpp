@@ -1,14 +1,5 @@
-#include "householder.h"
+#include "biblioteca.h"
 
-// Creates a vector of zeros
-VectorXd zeros(int size){
-	VectorXd v(size);
-	for (int i = 0; i < size; i++)
-	{
-		v(i) = 0;
-	}
-	return v;
-}
 
 MatrixXd mountHouseHolder(Ref<MatrixXd> A, int c){
 	
