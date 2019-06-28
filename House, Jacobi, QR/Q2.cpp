@@ -30,12 +30,13 @@ int main(){
 	tie(It_J,H_J) = HouseHolder(A_J);
 	tie(valueJ, vectorJ) = jacobi(It_J, E, H_J);
 
-	ordenar(valueJ, vectorJ);
-
 	around(It_J);
 	around(H_J);
 	around(valueJ);
 	around(vectorJ);
+
+	ordenar(valueJ, vectorJ);
+
 
 	IOFormat CleanFmt(4, 0, ", ", "\n", "│", "│");
 	cout << "------------------- Metodo de Jacobi -------------------" << endl << endl;
@@ -56,12 +57,13 @@ int main(){
 	tie(It_QR,H_QR) = HouseHolder(A_QR);
 	tie(valueQR, vectorQR) = QR(It_QR, E, H_QR);
 
-	ordenar(valueQR, vectorQR);
-
 	around(It_QR);
 	around(H_QR);
 	around(valueQR);
 	around(vectorQR);
+
+	ordenar(valueQR, vectorQR);
+
 
 	cout << "------------------- Metodo QR -------------------" << endl << endl;
 	cout << "Matriz Tridiagonal" << endl << It_QR.format(CleanFmt) << endl << endl;
@@ -75,7 +77,7 @@ int main(){
 	MatrixXd Sigma(rows, cols);
 	MatrixXd aux(rows, cols);
 
-	Sigma = valueQR; //mudar para valueJ
+	Sigma = valueJ; //mudar para valueJ
 	
 	sqrt_diagonal(Sigma);
 	cout << "Sigma: " << endl << Sigma.format(CleanFmt) << endl;

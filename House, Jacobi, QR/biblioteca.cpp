@@ -78,7 +78,7 @@ void ordenar(Ref<MatrixXd> Matriz_Valor, Ref<MatrixXd> Matriz_Vetor){
 
 	VectorXd vetor_diagonal(rows);
 	VectorXd vetor_indice(rows);
-	//MatrixXd EigenValueMatriz(rows,cols);
+	MatrixXd EigenValueMatriz(rows,cols);
 	MatrixXd EigenVectorMatriz(rows,cols);
 	
 
@@ -104,14 +104,24 @@ void ordenar(Ref<MatrixXd> Matriz_Valor, Ref<MatrixXd> Matriz_Vetor){
 
 	for (int i = 0; i < rows; i++){
 		for (int j = 0; j < cols; j++){
-
-			//EigenValueMatriz(i,j) =	Matriz_Valor(i, vetor_indice(j));
-			EigenVectorMatriz(i,j) =	Matriz_Vetor(i, vetor_indice(j));
 			
+			EigenVectorMatriz(i,j) =	Matriz_Vetor(i, vetor_indice(j));
+			EigenValueMatriz(i,j) =	Matriz_Valor(i, vetor_indice(j));
 
 		}	
 	}
-	//Matriz_Valor = EigenValueMatriz;
+
+	for (int i = 0; i < cols; i++){
+		for (int j = 0; j < rows; j++){
+
+			if(EigenValueMatriz(j,i) != 0 and i != j){
+				EigenValueMatriz(i,i) = EigenValueMatriz(j,i);
+				EigenValueMatriz(j,i) = 0;
+			}
+		}
+	}
+
+	Matriz_Valor = EigenValueMatriz;
 	Matriz_Vetor = EigenVectorMatriz;
 
 }
