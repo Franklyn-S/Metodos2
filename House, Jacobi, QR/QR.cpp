@@ -44,6 +44,8 @@ tuple<MatrixXd, MatrixXd> QR(Ref<MatrixXd> A, double E, Ref<MatrixXd> H){
 
 
 	IOFormat CleanFmt(4, 0, ", ", "\n", "│", "│");
+	around(Q);
+	around(R);
 	cout << "Matriz Q" << endl << Q.format(CleanFmt) << endl << endl;
 	cout << "Matriz R" << endl << R.format(CleanFmt) << endl << endl;
 

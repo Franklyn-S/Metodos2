@@ -32,6 +32,9 @@ int main(){
 
 	//HouseHolder
 	tie(It,H) = HouseHolder(A);
+	//arredonda os zeros para 0
+	around(It);
+	around(H);
 
 	//printa matrizes tridiagonal e acumulada do House Holder
 	cout << "Matriz Tridiagonal" << endl << It.format(CleanFmt) << endl << endl;
@@ -51,8 +54,7 @@ int main(){
 	tie(AL,AT) = ordenar(AL, AT);
 	
 	//Arredonda os Valores das Matrizes
-	around(It);
-	around(H);
+
 	around(AL);
 	around(AT);
 
