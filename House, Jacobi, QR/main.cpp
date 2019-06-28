@@ -23,12 +23,19 @@ int main(){
 	MatrixXd AL(rows, cols);
 	MatrixXd AT(rows, cols);
 
+	//Formato do Print de Matriz (Eigen)
+	IOFormat CleanFmt(4, 0, ", ", "\n", "│", "│");
+
 	int op; 
 	cout << "1 - Metodo de Jacobi" << endl << "2 - Metodo QR" << endl; 
 	cin >> op;
 
 	//HouseHolder
 	tie(It,H) = HouseHolder(A);
+
+	//printa matrizes tridiagonal e acumulada do House Holder
+	cout << "Matriz Tridiagonal" << endl << It.format(CleanFmt) << endl << endl;
+	cout << "Matriz Acumulada" << endl << H.format(CleanFmt) << endl << endl;
 
 	//Jacobi
 	if (op == 1) 
@@ -41,7 +48,6 @@ int main(){
 	else 
 		cout << "Opção Invalida" << endl;
 
-
 	tie(AL,AT) = ordenar(AL, AT);
 	
 	//Arredonda os Valores das Matrizes
@@ -50,11 +56,7 @@ int main(){
 	around(AL);
 	around(AT);
 
-	//Formato do Print de Matriz (Eigen)
-	IOFormat CleanFmt(4, 0, ", ", "\n", "│", "│");
 
-	cout << "Matriz Tridiagonal" << endl << It.format(CleanFmt) << endl << endl;
-	cout << "Matriz Acumulada" << endl << H.format(CleanFmt) << endl << endl;
 	cout << "Matriz de Autovalores: "<< endl << AL.format(CleanFmt) << endl << endl;
 	cout << "Matriz de Autovetores: " << endl << AT.format(CleanFmt) << endl;
 

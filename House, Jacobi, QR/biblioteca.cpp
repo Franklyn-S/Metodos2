@@ -16,7 +16,7 @@ void around(Ref<MatrixXd> Matriz){
 	for (int i = 0; i < Matriz.rows(); i++){
 		for(int j = 0; j < Matriz.cols(); j++){
 			
-		if (fabs(Matriz(i,j)) < 0.0001)
+		if (fabs(Matriz(i,j)) < 0.01)
 			Matriz(i,j) = round(Matriz(i,j));
 		}
 	}
@@ -44,8 +44,8 @@ MatrixXd montar_Pij(Ref<MatrixXd> A, int i, int j){
 	
 	Pij(i,i) = cos(teta);
 	Pij(j,j) = cos(teta);
-	Pij(i,j) = sin(teta);
-	Pij(j,i) = -sin(teta);
+	Pij(i,j) = -sin(teta);
+	Pij(j,i) = sin(teta);
 	
 	return Pij;
 }
