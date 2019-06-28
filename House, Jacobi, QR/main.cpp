@@ -22,6 +22,7 @@ int main(){
 	MatrixXd It(rows, cols);
 	MatrixXd AL(rows, cols);
 	MatrixXd AT(rows, cols);
+	MatrixXd I(rows, cols);
 
 	//Formato do Print de Matriz (Eigen)
 	IOFormat CleanFmt(4, 0, ", ", "\n", "│", "│");
@@ -40,13 +41,15 @@ int main(){
 	cout << "Matriz Tridiagonal" << endl << It.format(CleanFmt) << endl << endl;
 	cout << "Matriz Acumulada" << endl << H.format(CleanFmt) << endl << endl;
 
+	I = MatrixXd::Identity(rows, cols);
+
 	//Jacobi
 	if (op == 1) 
-		tie(AL, AT) = jacobi(A, E, H);
+		tie(AL, AT) = jacobi(It, E, H);
 
 	//QR
 	else if(op == 2) 
-		tie(AL, AT) = QR(A, E, H);
+		tie(AL, AT) = QR(It, E, H);
 		
 	else 
 		cout << "Opção Invalida" << endl;
@@ -57,7 +60,6 @@ int main(){
 
 	around(AL);
 	around(AT);
-
 
 	cout << "Matriz de Autovalores: "<< endl << AL.format(CleanFmt) << endl << endl;
 	cout << "Matriz de Autovetores: " << endl << AT.format(CleanFmt) << endl;
