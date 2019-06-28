@@ -29,7 +29,7 @@ tuple<MatrixXd, MatrixXd> QR(Ref<MatrixXd> A, double E, Ref<MatrixXd> H){
 	MatrixXd Q(rows, cols);
 	MatrixXd R(rows, cols);
 	MatrixXd P(rows, cols);
-	//P = MatrixXd::Identity(rows, cols);
+
 	P = H;
 	int MAX_INTERATION = 2000;
 	int i = 0;
@@ -40,14 +40,14 @@ tuple<MatrixXd, MatrixXd> QR(Ref<MatrixXd> A, double E, Ref<MatrixXd> H){
 		i++;
 	}
 
-	//if (i == MAX_INTERATION) cout << "PAROU PELO I!!!!" << endl;
 
-
+	/*
 	IOFormat CleanFmt(4, 0, ", ", "\n", "│", "│");
 	around(Q);
 	around(R);
 	cout << "Matriz Q" << endl << Q.format(CleanFmt) << endl << endl;
 	cout << "Matriz R" << endl << R.format(CleanFmt) << endl << endl;
+	*/
 
 	return make_tuple(A,P);
 }

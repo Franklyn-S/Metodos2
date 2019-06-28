@@ -10,17 +10,6 @@ double error(Ref<MatrixXd> A){
 	return sqrt(soma);
 }
 
-// Aredonda Valores de uma Matriz 
-void around(Ref<MatrixXd> Matriz){
-
-	for (int i = 0; i < Matriz.rows(); i++){
-		for(int j = 0; j < Matriz.cols(); j++){
-			
-		if (fabs(Matriz(i,j)) < 0.01)
-			Matriz(i,j) = round(Matriz(i,j));
-		}
-	}
-}
 
 // Cria Vetor de Zeros
 VectorXd zeros(int size){
@@ -69,17 +58,29 @@ MatrixXd calcular_Pij(Ref<MatrixXd> A, int i, int j){
 
 }
 
+// Aredonda Valores de uma Matriz 
+void around(Ref<MatrixXd> Matriz){
+
+	for (int i = 0; i < Matriz.rows(); i++){
+		for(int j = 0; j < Matriz.cols(); j++){
+			
+		if (fabs(Matriz(i,j)) < 0.001)
+			Matriz(i,j) = round(Matriz(i,j));
+		}
+	}
+}
+
 // Ordena os Autovetores em Relação aos Autovalores em Ordem Decrescente 
-tuple<MatrixXd, MatrixXd> ordenar(Ref<MatrixXd> Matriz_Valor, Ref<MatrixXd> Matriz_Vetor){
+void ordenar(Ref<MatrixXd> Matriz_Valor, Ref<MatrixXd> Matriz_Vetor){
 
 	int rows = Matriz_Valor.rows();
 	int cols = Matriz_Valor.cols();
 
 	VectorXd vetor_diagonal(rows);
 	VectorXd vetor_indice(rows);
+	//MatrixXd EigenValueMatriz(rows,cols);
 	MatrixXd EigenVectorMatriz(rows,cols);
-	MatrixXd EigenValueMatriz(rows,cols);
-
+	
 
 	for (int i = 0; i < rows; ++i){
 		vetor_diagonal(i) = Matriz_Valor(i,i);
@@ -103,13 +104,21 @@ tuple<MatrixXd, MatrixXd> ordenar(Ref<MatrixXd> Matriz_Valor, Ref<MatrixXd> Matr
 
 	for (int i = 0; i < rows; i++){
 		for (int j = 0; j < cols; j++){
-		
+
+			//EigenValueMatriz(i,j) =	Matriz_Valor(i, vetor_indice(j));
 			EigenVectorMatriz(i,j) =	Matriz_Vetor(i, vetor_indice(j));
-			EigenValueMatriz(i,j) =	Matriz_Valor(i, vetor_indice(j));
+			
 
 		}	
 	}
+	//Matriz_Valor = EigenValueMatriz;
+	Matriz_Vetor = EigenVectorMatriz;
 
-	return make_tuple(EigenValueMatriz, EigenVectorMatriz);
+}
 
+
+void sqrt_diagonal(Ref<MatrixXd> M){
+	for (int i = 0; i < M.rows(); i++){
+		M(i,i) = sqrt(M(i,i));
+	}
 }

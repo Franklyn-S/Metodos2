@@ -10,10 +10,11 @@ using namespace std;
 //Biblioteca.cpp (Funções Auxiliares)
 double error(Ref<MatrixXd> A); 													
 void around(Ref<MatrixXd> Matriz);
+void ordenar(Ref<MatrixXd> Matriz_Valor, Ref<MatrixXd> Matriz_Vetor);
+void sqrt_diagonal(Ref<MatrixXd> M);
 VectorXd zeros(int size);
 MatrixXd montar_Pij(Ref<MatrixXd> A, int i, int j);
 MatrixXd calcular_Pij(Ref<MatrixXd> A, int i, int j);
-tuple<MatrixXd, MatrixXd> ordenar(Ref<MatrixXd> Matriz_Valor, Ref<MatrixXd> Matriz_Vetor);
 
 //HolseHolder
 MatrixXd mountHouseHolder(Ref<MatrixXd> A, int c);
