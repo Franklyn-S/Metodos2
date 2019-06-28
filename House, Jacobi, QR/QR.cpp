@@ -10,8 +10,8 @@ tuple<MatrixXd, MatrixXd> Decomp_QR(Ref<MatrixXd> A){
 
 	for (int j = 0; j < cols-1; j++){
 		for (int i = (j+1); i < rows; i++){
+			
 			Pt = montar_Pij(A, i, j);
-
 			A = Pt*A;
 			Qt = Pt*Qt;
 		}
