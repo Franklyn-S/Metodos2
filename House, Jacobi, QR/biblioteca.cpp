@@ -1,4 +1,4 @@
-#include "biblioteca.h"
+#include "biblioteca.hpp"
 
 
 // Creates a vector of zeros
@@ -92,12 +92,19 @@ tuple<MatrixXd, MatrixXd> ordenar_autovetores(Ref<MatrixXd> Matriz_Valor, Ref<Ma
 	for (int i = 0; i < rows; i++){
 		for (int j = 0; j < cols; j++){
 		
-			EigenVectorMatriz(i,j) =	Matriz_Vetor(i, vetor_indice(j));
-			EigenValueMatriz(i,j) =	Matriz_Valor(i, vetor_indice(j));
+			EigenVectorMatriz(i,j) =	around(Matriz_Vetor(i, vetor_indice(j)));
+			EigenValueMatriz(i,j) =	around(Matriz_Valor(i, vetor_indice(j)));
 
 		}	
 	}
 
 	return make_tuple(EigenValueMatriz, EigenVectorMatriz);
 
+}
+
+double around(double num){
+
+	if (fabs(num) < 0.0001)
+		return(round(num));
+	return(num);
 }

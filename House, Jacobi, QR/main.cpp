@@ -1,4 +1,4 @@
-#include "biblioteca.h"
+#include "biblioteca.hpp"
 
 
 
@@ -47,9 +47,6 @@ int main(){
 		
 	else 
 		cout << "Opção Invalida" << endl;
-	
-	cout << "Matriz de autovalores Desordenado: "<< endl << AL.format(CleanFmt) << endl << endl;
-	cout << "Matriz de autovetores Desordenado: " << endl << AT.format(CleanFmt) << endl;
 
 
 	tie(AL,AT) = ordenar_autovetores(AL, AT);

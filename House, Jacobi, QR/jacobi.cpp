@@ -1,4 +1,4 @@
-#include "biblioteca.h"
+#include "biblioteca.hpp"
 
 tuple<MatrixXd, MatrixXd> jacobi(Ref<MatrixXd> A, double E, Ref<MatrixXd> H){
 
