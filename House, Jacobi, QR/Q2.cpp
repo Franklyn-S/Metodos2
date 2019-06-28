@@ -39,11 +39,12 @@ int main(){
 
 
 	IOFormat CleanFmt(4, 0, ", ", "\n", "│", "│");
-	cout << "------------------- Metodo de Jacobi -------------------" << endl << endl;
-	cout << "Matriz Tridiagonal" << endl << It_J.format(CleanFmt) << endl << endl;
-	cout << "Matriz Acumulada" << endl << H_J.format(CleanFmt) << endl << endl;
-	cout << "Matriz de Autovalores: "<< endl << valueJ.format(CleanFmt) << endl << endl;
-	cout << "Matriz de Autovetores: " << endl << vectorJ.format(CleanFmt) << endl;
+	cout << "\n" <<"---------------------------  Metodo de Jacobi --------------------------- " << "\n" << endl;
+	cout << "Matriz A*A_transposta" << endl << A_J.format(CleanFmt) << "\n" << endl;
+	cout << "Matriz Tridiagonal" << endl << It_J.format(CleanFmt) << "\n" << endl;
+	cout << "Matriz Acumulada" << endl << H_J.format(CleanFmt) << "\n" << endl;
+	cout << "Matriz de Autovalores: "<< endl << valueJ.format(CleanFmt) << "\n" << endl;
+	cout << "Matriz de Autovetores: " << endl << vectorJ.format(CleanFmt) << "\n" << endl;
 
 
 	//---------------------------------------- Metodo QR ------------------------------------
@@ -65,24 +66,30 @@ int main(){
 	ordenar(valueQR, vectorQR);
 
 
-	cout << "------------------- Metodo QR -------------------" << endl << endl;
-	cout << "Matriz Tridiagonal" << endl << It_QR.format(CleanFmt) << endl << endl;
-	cout << "Matriz Acumulada" << endl << H_QR.format(CleanFmt) << endl << endl;
-	cout << "Matriz de Autovalores: "<< endl << valueQR.format(CleanFmt) << endl << endl;
-	cout << "Matriz de Autovetores: " << endl << vectorQR.format(CleanFmt) << endl;
+	cout << "\n" <<"---------------------------------- Metodo QR ---------------------------------- " << "\n" << endl;
+	cout << "Matriz A_transposta*A" << endl << A_J.format(CleanFmt) << "\n" << endl;
+	cout << "Matriz Tridiagonal" << endl << It_QR.format(CleanFmt) << "\n" << endl;
+	cout << "Matriz Acumulada" << endl << H_QR.format(CleanFmt) << "\n" << endl;
+	cout << "Matriz de Autovalores: "<< endl << valueQR.format(CleanFmt) << "\n" << endl;
+	cout << "Matriz de Autovetores: " << endl << vectorQR.format(CleanFmt) << "\n" << endl;
 
 
 
-	// Resultados
+	//---------------------------------------- RESULTADO ------------------------------------
 	MatrixXd Sigma(rows, cols);
 	MatrixXd aux(rows, cols);
 
-	Sigma = valueJ; //mudar para valueJ
-	
+	Sigma = valueJ;
 	sqrt_diagonal(Sigma);
-	cout << "Sigma: " << endl << Sigma.format(CleanFmt) << endl;
-	cout << "A: " << endl << A.format(CleanFmt) << endl;
-	aux = vectorJ*Sigma*vectorJ.transpose();
-	cout << "Matriz UΣ(V^t): " << endl << aux.format(CleanFmt) << endl;
+	aux = vectorQR*Sigma*vectorQR.transpose();
+
+	cout << "\n" <<"---------------------------------- RESULTADO ---------------------------------- " << "\n" << endl;
+	
+	cout << "Matriz U: " << endl << vectorJ.format(CleanFmt) << "\n" << endl;
+	cout << "Matriz Σ: " << endl << Sigma.format(CleanFmt) << "\n" << endl;
+	cout << "Matriz V: " << endl << (vectorJ.transpose()).format(CleanFmt) << "\n" << endl;
+	cout << "Matriz A: " << endl << A.format(CleanFmt) << "\n" << endl;
+	cout << "Matriz U*Σ*(V^t): " << endl << aux.format(CleanFmt) << "\n" << endl;
+
 	return 0;
 }

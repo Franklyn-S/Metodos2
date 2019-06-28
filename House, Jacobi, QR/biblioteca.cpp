@@ -1,7 +1,7 @@
 #include "biblioteca.hpp"
 
 
-// Verifica o erro
+//Verifica o erro
 double error(Ref<MatrixXd> A){
 	double soma = 0;
 	for (int i = 0; i < A.rows(); ++i)
@@ -11,7 +11,7 @@ double error(Ref<MatrixXd> A){
 }
 
 
-// Cria Vetor de Zeros
+//Cria Vetor de Zeros
 VectorXd zeros(int size){
 	VectorXd v(size);
 	for (int i = 0; i < size; i++)
@@ -21,7 +21,7 @@ VectorXd zeros(int size){
 	return v;
 }
 
-// Controi a Matriz Identidade do QR
+//Controi a Matriz Identidade do QR
 MatrixXd montar_Pij(Ref<MatrixXd> A, int i, int j){
   	int rows  = A.rows();
   	int cols  = A.cols();
@@ -39,7 +39,7 @@ MatrixXd montar_Pij(Ref<MatrixXd> A, int i, int j){
 	return Pij;
 }
 
-// Controi Matriz Identidade do Jacobi
+//Controi Matriz Identidade do Jacobi
 MatrixXd calcular_Pij(Ref<MatrixXd> A, int i, int j){
   	int rows  = A.rows();
   	int cols  = A.cols();
@@ -58,7 +58,7 @@ MatrixXd calcular_Pij(Ref<MatrixXd> A, int i, int j){
 
 }
 
-// Aredonda Valores de uma Matriz 
+//Aredonda Valores de uma Matriz 
 void around(Ref<MatrixXd> Matriz){
 
 	for (int i = 0; i < Matriz.rows(); i++){
@@ -70,7 +70,7 @@ void around(Ref<MatrixXd> Matriz){
 	}
 }
 
-// Ordena os Autovetores em Relação aos Autovalores em Ordem Decrescente 
+//Ordena os Autovetores em Relação aos Autovalores em Ordem Decrescente 
 void ordenar(Ref<MatrixXd> Matriz_Valor, Ref<MatrixXd> Matriz_Vetor){
 
 	int rows = Matriz_Valor.rows();
@@ -127,6 +127,7 @@ void ordenar(Ref<MatrixXd> Matriz_Valor, Ref<MatrixXd> Matriz_Vetor){
 }
 
 
+//Calcula raiz quadrada dos elementos da diagonal
 void sqrt_diagonal(Ref<MatrixXd> M){
 	for (int i = 0; i < M.rows(); i++){
 		M(i,i) = sqrt(M(i,i));
