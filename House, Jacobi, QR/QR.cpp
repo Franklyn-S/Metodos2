@@ -8,8 +8,8 @@ tuple<MatrixXd, MatrixXd> Decomp_QR(Ref<MatrixXd> A){
 	MatrixXd Qt(rows, cols);
 	Qt = MatrixXd::Identity(rows, cols);
 
-	for (int j = 0; j < cols-2; j++){
-		for (int i = (j+1); i < rows-1; i++){
+	for (int j = 0; j < cols-1; j++){
+		for (int i = (j+1); i < rows; i++){
 			Pt = montar_Pij(A, i, j);
 
 			A = Pt*A;
