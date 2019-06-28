@@ -9,11 +9,11 @@ int main(){
 
 	MatrixXd A(5, 5);
 	A <<
-	 36, 3, 9, 7, 6,
-     3, 20, 1, 3, 12,
-	 9, 1, 63, 16, 13,
-	 7, 3, 16, 37, 7,
-	 6, 12, 13, 7, 51;
+	 40, 3, 9, 7, 8,
+	 3, 23, 4, 7, 12,
+	 9, 4, 65, 16, 15,
+	 7, 7, 16, 37, 12,
+	 8, 12, 15, 12, 51;
 
 	double E = 0.01;
 
@@ -46,7 +46,9 @@ int main(){
 		tie(AL, AT) = QR(A, E, H);
 		
 	else cout << "Opção Invalida" << endl;
-		
+	
+	tie(AL,AT) = ordenar_autovetores(AL, AT);
+
 	cout << "Matriz de autovalores: "<< endl << AL.format(CleanFmt) << endl << endl;
 	cout << "Matriz de autovetores: " << endl << AT.format(CleanFmt) << endl;
 

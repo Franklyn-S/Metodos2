@@ -58,14 +58,15 @@ MatrixXd calcular_Pij(Ref<MatrixXd> A, int i, int j){
 
 }
 
-MatrixXd ordenar_autovetores(Ref<MatrixXd> Matriz_Valor, Ref<MatrixXd> Matriz_Vetor){
+tuple<MatrixXd, MatrixXd> ordenar_autovetores(Ref<MatrixXd> Matriz_Valor, Ref<MatrixXd> Matriz_Vetor){
 
 	int rows = Matriz_Valor.rows();
 	int cols = Matriz_Valor.cols();
 
 	VectorXd vetor_diagonal(rows);
 	VectorXd vetor_indice(rows);
-	MatrixXd Matriz_Ordenada(rows,cols);
+	MatrixXd EigenVectorMatriz(rows,cols);
+	MatrixXd EigenValueMatriz(rows,cols);
 
 
 	for (int i = 0; i < rows; ++i){
@@ -91,11 +92,12 @@ MatrixXd ordenar_autovetores(Ref<MatrixXd> Matriz_Valor, Ref<MatrixXd> Matriz_Ve
 	for (int i = 0; i < rows; i++){
 		for (int j = 0; j < cols; j++){
 		
-			Matriz_Ordenada(i,j) =	Matriz_Vetor(i, vetor_indice(j));
+			EigenVectorMatriz(i,j) =	Matriz_Vetor(i, vetor_indice(j));
+			EigenValueMatriz(i,j) =	Matriz_Valor(i, vetor_indice(j));
 
 		}	
 	}
 
-	return(Matriz_Ordenada);
+	return make_tuple(EigenValueMatriz, EigenVectorMatriz);
 
 }
