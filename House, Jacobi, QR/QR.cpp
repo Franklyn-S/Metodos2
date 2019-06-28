@@ -1,4 +1,4 @@
-#include "biblioteca.h"
+#include "biblioteca.hpp"
 
 tuple<MatrixXd, MatrixXd> Decomp_QR(Ref<MatrixXd> A){
 

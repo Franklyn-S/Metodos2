@@ -9,6 +9,7 @@ using namespace std;
 
 //Biblioteca.cpp (Funções Auxiliares)
 
+double around(double num);
 VectorXd zeros(int size);
 double error(Ref<MatrixXd> A); 													
 MatrixXd montar_Pij(Ref<MatrixXd> A, int i, int j);
