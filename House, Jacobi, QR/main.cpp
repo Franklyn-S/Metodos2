@@ -1,9 +1,6 @@
 #include "biblioteca.hpp"
 
-
-
 //g++ -c *.cpp -I eigen -std=c++11 && g++ -o main *.o && ./main
-
 
 int main(){
 
@@ -15,12 +12,11 @@ int main(){
 	 7, 7, 16, 37, 12,
 	 8, 12, 15, 12, 51;
 
+	//Erro
 	double E = 0.01;
 
 	int rows = A.rows();
 	int cols = A.cols();
-
-	IOFormat CleanFmt(4, 0, ", ", "\n", "│", "│");
 	
 	MatrixXd H(rows, cols);
 	MatrixXd It(rows, cols);
@@ -34,9 +30,6 @@ int main(){
 	//HouseHolder
 	tie(It,H) = HouseHolder(A);
 
-	cout << "Matriz Tridiagonal" << endl << It.format(CleanFmt) << endl << endl;
-	cout << "Matriz Acumulada" << endl << H.format(CleanFmt) << endl << endl;
-
 	//Jacobi
 	if (op == 1) 
 		tie(AL, AT) = jacobi(A, E, H);
@@ -49,10 +42,21 @@ int main(){
 		cout << "Opção Invalida" << endl;
 
 
-	tie(AL,AT) = ordenar_autovetores(AL, AT);
+	tie(AL,AT) = ordenar(AL, AT);
+	
+	//Arredonda os Valores das Matrizes
+	around(It);
+	around(H);
+	around(AL);
+	around(AT);
 
-	cout << "Matriz de autovalores: "<< endl << AL.format(CleanFmt) << endl << endl;
-	cout << "Matriz de autovetores: " << endl << AT.format(CleanFmt) << endl;
+	//Formato do Print de Matriz (Eigen)
+	IOFormat CleanFmt(4, 0, ", ", "\n", "│", "│");
+
+	cout << "Matriz Tridiagonal" << endl << It.format(CleanFmt) << endl << endl;
+	cout << "Matriz Acumulada" << endl << H.format(CleanFmt) << endl << endl;
+	cout << "Matriz de Autovalores: "<< endl << AL.format(CleanFmt) << endl << endl;
+	cout << "Matriz de Autovetores: " << endl << AT.format(CleanFmt) << endl;
 
 	return 0;
 }

@@ -1,7 +1,28 @@
 #include "biblioteca.hpp"
 
 
-// Creates a vector of zeros
+// Verifica o erro
+double error(Ref<MatrixXd> A){
+	double soma = 0;
+	for (int i = 0; i < A.rows(); ++i)
+		for (int j = 0; j < A.cols(); ++j)
+			if(i!=j) soma += pow(A(i,j),2);
+	return sqrt(soma);
+}
+
+// Aredonda Valores de uma Matriz 
+void around(Ref<MatrixXd> Matriz){
+
+	for (int i = 0; i < Matriz.rows(); i++){
+		for(int j = 0; j < Matriz.cols(); j++){
+			
+		if (fabs(Matriz(i,j)) < 0.0001)
+			Matriz(i,j) = round(Matriz(i,j));
+		}
+	}
+}
+
+// Cria Vetor de Zeros
 VectorXd zeros(int size){
 	VectorXd v(size);
 	for (int i = 0; i < size; i++)
@@ -11,17 +32,8 @@ VectorXd zeros(int size){
 	return v;
 }
 
-double error(Ref<MatrixXd> A){
-	double soma = 0;
-	for (int i = 0; i < A.rows(); ++i)
-		for (int j = 0; j < A.cols(); ++j)
-			if(i!=j) soma += pow(A(i,j),2);
-	return sqrt(soma);
-}
-
-
+// Controi a Matriz Identidade do QR
 MatrixXd montar_Pij(Ref<MatrixXd> A, int i, int j){
-  	// Construindo Matriz Identidade
   	int rows  = A.rows();
   	int cols  = A.cols();
 	MatrixXd Pij(rows, cols);
@@ -38,9 +50,8 @@ MatrixXd montar_Pij(Ref<MatrixXd> A, int i, int j){
 	return Pij;
 }
 
-
+// Controi Matriz Identidade do Jacobi
 MatrixXd calcular_Pij(Ref<MatrixXd> A, int i, int j){
-  	// Construindo Matriz Identidade
   	int rows  = A.rows();
   	int cols  = A.cols();
 	MatrixXd Pij(rows, cols);
@@ -58,7 +69,8 @@ MatrixXd calcular_Pij(Ref<MatrixXd> A, int i, int j){
 
 }
 
-tuple<MatrixXd, MatrixXd> ordenar_autovetores(Ref<MatrixXd> Matriz_Valor, Ref<MatrixXd> Matriz_Vetor){
+// Ordena os Autovetores em Relação aos Autovalores em Ordem Decrescente 
+tuple<MatrixXd, MatrixXd> ordenar(Ref<MatrixXd> Matriz_Valor, Ref<MatrixXd> Matriz_Vetor){
 
 	int rows = Matriz_Valor.rows();
 	int cols = Matriz_Valor.cols();
@@ -92,19 +104,12 @@ tuple<MatrixXd, MatrixXd> ordenar_autovetores(Ref<MatrixXd> Matriz_Valor, Ref<Ma
 	for (int i = 0; i < rows; i++){
 		for (int j = 0; j < cols; j++){
 		
-			EigenVectorMatriz(i,j) =	around(Matriz_Vetor(i, vetor_indice(j)));
-			EigenValueMatriz(i,j) =	around(Matriz_Valor(i, vetor_indice(j)));
+			EigenVectorMatriz(i,j) =	Matriz_Vetor(i, vetor_indice(j));
+			EigenValueMatriz(i,j) =	Matriz_Valor(i, vetor_indice(j));
 
 		}	
 	}
 
 	return make_tuple(EigenValueMatriz, EigenVectorMatriz);
 
-}
-
-double around(double num){
-
-	if (fabs(num) < 0.0001)
-		return(round(num));
-	return(num);
 }
