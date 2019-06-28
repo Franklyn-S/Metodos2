@@ -8,14 +8,12 @@ using namespace Eigen;
 using namespace std;
 
 //Biblioteca.cpp (Funções Auxiliares)
-
-double around(double num);
-VectorXd zeros(int size);
 double error(Ref<MatrixXd> A); 													
+void around(Ref<MatrixXd> Matriz);
+VectorXd zeros(int size);
 MatrixXd montar_Pij(Ref<MatrixXd> A, int i, int j);
 MatrixXd calcular_Pij(Ref<MatrixXd> A, int i, int j);
-tuple<MatrixXd, MatrixXd> ordenar_autovetores(Ref<MatrixXd> Matriz_Valor, Ref<MatrixXd> Matriz_Vetor);
-
+tuple<MatrixXd, MatrixXd> ordenar(Ref<MatrixXd> Matriz_Valor, Ref<MatrixXd> Matriz_Vetor);
 
 //HolseHolder
 MatrixXd mountHouseHolder(Ref<MatrixXd> A, int c);
