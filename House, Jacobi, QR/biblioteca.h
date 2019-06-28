@@ -8,18 +8,13 @@ using namespace Eigen;
 using namespace std;
 
 //Biblioteca.cpp (Funções Auxiliares)
-<<<<<<< HEAD
+
 VectorXd zeros(int size);
 double error(Ref<MatrixXd> A); 													
 MatrixXd montar_Pij(Ref<MatrixXd> A, int i, int j);
 MatrixXd calcular_Pij(Ref<MatrixXd> A, int i, int j);
 MatrixXd ordenar_autovetores(Ref<MatrixXd> Matriz_Valor, Ref<MatrixXd> Matriz_Vetor);
-=======
-double error(Ref<MatrixXd> A); 	
-VectorXd zeros(int size);												
-MatrixXd montar_Pij(Ref<MatrixXd> A, int i, int j);
-MatrixXd calcular_Pij(Ref<MatrixXd> A, int i, int j);
->>>>>>> f8efb4354de2655a5191aadd35e53fcc4890b79c
+
 
 //HolseHolder
 MatrixXd mountHouseHolder(Ref<MatrixXd> A, int c);
@@ -31,9 +26,6 @@ tuple<MatrixXd, MatrixXd> QR(Ref<MatrixXd> A, double E, Ref<MatrixXd> H);
 
 //Jacobi
 tuple<MatrixXd, MatrixXd> jacobi(Ref<MatrixXd> A, double E, Ref<MatrixXd> H);	
-																			
-<<<<<<< HEAD
+
 #endif
-=======
-#endif
->>>>>>> f8efb4354de2655a5191aadd35e53fcc4890b79c
+

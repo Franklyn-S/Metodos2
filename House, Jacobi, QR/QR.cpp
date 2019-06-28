@@ -40,7 +40,7 @@ tuple<MatrixXd, MatrixXd> QR(Ref<MatrixXd> A, double E, Ref<MatrixXd> H){
 		i++;
 	}
 
-	if (i == MAX_INTERATION) cout << "PAROU PELO I!!!!" << endl;
+	//if (i == MAX_INTERATION) cout << "PAROU PELO I!!!!" << endl;
 
 
 	IOFormat CleanFmt(4, 0, ", ", "\n", "│", "│");
