@@ -6,14 +6,14 @@ int main(){
 
 	MatrixXd A(5, 5);
 	A <<
-	 40, 3, 9, 7, 8,
-	 3, 23, 4, 7, 12,
-	 9, 4, 65, 16, 15,
-	 7, 7, 16, 37, 12,
-	 8, 12, 15, 12, 51;
+ 		40, 3, 9, 7, 8,
+	 	3, 23, 4, 7, 12,
+	 	9, 4, 65, 16, 15,
+	 	7, 7, 16, 37, 12,
+		8, 12, 15, 12, 51;
 
 	//Erro
-	double E = 0.01;
+	double E = 0.0001;
 
 	int rows = A.rows();
 	int cols = A.cols();
@@ -22,7 +22,6 @@ int main(){
 	MatrixXd It(rows, cols);
 	MatrixXd AL(rows, cols);
 	MatrixXd AT(rows, cols);
-	MatrixXd I(rows, cols);
 
 	//Formato do Print de Matriz (Eigen)
 	IOFormat CleanFmt(4, 0, ", ", "\n", "│", "│");
@@ -33,15 +32,13 @@ int main(){
 
 	//HouseHolder
 	tie(It,H) = HouseHolder(A);
-	//arredonda os zeros para 0
+	
+	//Arredonda os Valores das Matrizes
 	around(It);
 	around(H);
-
-	//printa matrizes tridiagonal e acumulada do House Holder
 	cout << "Matriz Tridiagonal" << endl << It.format(CleanFmt) << endl << endl;
 	cout << "Matriz Acumulada" << endl << H.format(CleanFmt) << endl << endl;
 
-	I = MatrixXd::Identity(rows, cols);
 
 	//Jacobi
 	if (op == 1) 
@@ -57,12 +54,28 @@ int main(){
 	tie(AL,AT) = ordenar(AL, AT);
 	
 	//Arredonda os Valores das Matrizes
-
 	around(AL);
 	around(AT);
-
+	
 	cout << "Matriz de Autovalores: "<< endl << AL.format(CleanFmt) << endl << endl;
 	cout << "Matriz de Autovetores: " << endl << AT.format(CleanFmt) << endl;
+
+	//Para testar se A*v = λ*v
+
+	/*
+	VectorXd v(cols);
+	for (int i = 0; i < rows; i++){
+		for (int j = 0; j < cols; j++){
+
+			v(j) = AT(j,i);
+		}	
+
+		cout << "Vetor A*V"<< i << ": "<< endl << (A*v).format(CleanFmt) << endl << endl;
+		cout << "Vetor AL*V"<< i << ": "<< endl << (AL(i,i)*v).format(CleanFmt) << endl << endl;
+	}
+	*/
+
+
 
 	return 0;
 }

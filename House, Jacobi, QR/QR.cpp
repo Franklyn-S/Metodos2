@@ -31,7 +31,7 @@ tuple<MatrixXd, MatrixXd> QR(Ref<MatrixXd> A, double E, Ref<MatrixXd> H){
 	MatrixXd P(rows, cols);
 	//P = MatrixXd::Identity(rows, cols);
 	P = H;
-	int MAX_INTERATION = 100;
+	int MAX_INTERATION = 2000;
 	int i = 0;
 	while (error(A) > E and i < MAX_INTERATION){
 		tie(Q,R) = Decomp_QR(A);
