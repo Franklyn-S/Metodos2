@@ -45,8 +45,13 @@ int main(){
 	else if(op == 2) 
 		tie(AL, AT) = QR(A, E, H);
 		
-	else cout << "Opção Invalida" << endl;
+	else 
+		cout << "Opção Invalida" << endl;
 	
+	cout << "Matriz de autovalores Desordenado: "<< endl << AL.format(CleanFmt) << endl << endl;
+	cout << "Matriz de autovetores Desordenado: " << endl << AT.format(CleanFmt) << endl;
+
+
 	tie(AL,AT) = ordenar_autovetores(AL, AT);
 
 	cout << "Matriz de autovalores: "<< endl << AL.format(CleanFmt) << endl << endl;

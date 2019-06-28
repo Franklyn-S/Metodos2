@@ -13,7 +13,7 @@ VectorXd zeros(int size);
 double error(Ref<MatrixXd> A); 													
 MatrixXd montar_Pij(Ref<MatrixXd> A, int i, int j);
 MatrixXd calcular_Pij(Ref<MatrixXd> A, int i, int j);
-MatrixXd ordenar_autovetores(Ref<MatrixXd> Matriz_Valor, Ref<MatrixXd> Matriz_Vetor);
+tuple<MatrixXd, MatrixXd> ordenar_autovetores(Ref<MatrixXd> Matriz_Valor, Ref<MatrixXd> Matriz_Vetor);
 
 
 //HolseHolder
