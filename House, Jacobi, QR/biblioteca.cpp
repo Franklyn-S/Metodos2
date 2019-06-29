@@ -126,10 +126,21 @@ void ordenar(Ref<MatrixXd> Matriz_Valor, Ref<MatrixXd> Matriz_Vetor){
 
 }
 
-
 //Calcula raiz quadrada dos elementos da diagonal
 void sqrt_diagonal(Ref<MatrixXd> M){
 	for (int i = 0; i < M.rows(); i++){
 		M(i,i) = sqrt(M(i,i));
 	}
+}
+
+void igualarSinal(Ref<MatrixXd> MatrizA, Ref<MatrixXd> MatrizB){
+
+	for (int i = 0; i < MatrizA.cols(); i++){
+		if ((MatrizA(i,i) < 0 and MatrizB(i,i) > 0) or (MatrizA(i,i) > 0 and MatrizB(i,i) < 0) ){
+			for (int j = 0; j < MatrizA.rows(); j++){
+				MatrizB(j,i) = -1 * MatrizB(j,i);	
+			}
+		}
+	}
+
 }

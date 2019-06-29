@@ -2,15 +2,15 @@
 
 //g++ -c *.cpp -I eigen -std=c++11 && g++ -o q2 *.o && ./q2
 
+/*
+
 int main(){
 
-	MatrixXd A(5, 5);
+	MatrixXd A(3, 5);
 	A <<
 	 		40, 3, 9, 7, 8,
 		 	3, 23, 4, 7, 12,
-		 	9, 4, 65, 16, 15,
-		 	7, 7, 16, 37, 12,
-			8, 12, 15, 12, 51;
+		 	9, 4, 65, 16, 15;
 
 
 	//Erro
@@ -46,6 +46,7 @@ int main(){
 	cout << "Matriz de Autovalores: "<< endl << valueJ.format(CleanFmt) << "\n" << endl;
 	cout << "Matriz de Autovetores: " << endl << vectorJ.format(CleanFmt) << "\n" << endl;
 
+	
 
 	//---------------------------------------- Metodo QR ------------------------------------
 	MatrixXd A_QR(rows, cols);
@@ -56,7 +57,7 @@ int main(){
 	
 	A_QR = A.transpose()*A;
 	tie(It_QR,H_QR) = HouseHolder(A_QR);
-	tie(valueQR, vectorQR) = QR(It_QR, E, H_QR);
+	tie(valueQR, vectorQR) = jacobi(It_QR, E, H_QR);
 
 	around(It_QR);
 	around(H_QR);
@@ -74,23 +75,31 @@ int main(){
 	cout << "Matriz de Autovetores: " << endl << vectorQR.format(CleanFmt) << "\n" << endl;
 
 
-
 	//---------------------------------------- RESULTADO ------------------------------------
-	MatrixXd Sigma(rows, cols);
+	
+	MatrixXd Sigma(3, 5);
 	MatrixXd aux(rows, cols);
 
-	Sigma = valueJ;
-	sqrt_diagonal(Sigma);
-	igualarSinal(vectorJ, vectorQR);
-	
-	aux = vectorJ*Sigma*(vectorQR.transpose());
+	Sigma <<
+	73.085,  	0,  	0,  	0,  	0,
+        0,   	37.541, 0,      0,     	0,
+        0 ,       0 ,  24.542 , 0,     	0;
+
+	//Sigma = valueQR;
+	//sqrt_diagonal(Sigma);
+
+	aux = vectorJ*Sigma*vectorQR.transpose();
 
 	cout << "\n" <<"---------------------------------- RESULTADO ---------------------------------- " << "\n" << endl;
+	
 	cout << "Matriz U: " << endl << vectorJ.format(CleanFmt) << "\n" << endl;
 	cout << "Matriz Σ: " << endl << Sigma.format(CleanFmt) << "\n" << endl;
-	cout << "Matriz V: " << endl << (vectorQR.transpose()).format(CleanFmt) << "\n" << endl;
+	cout << "Matriz V: " << endl << vectorQR.format(CleanFmt) << "\n" << endl;
 	cout << "Matriz A: " << endl << A.format(CleanFmt) << "\n" << endl;
 	cout << "Matriz U*Σ*(V^t): " << endl << aux.format(CleanFmt) << "\n" << endl;
 
+
 	return 0;
 }
+
+*/
