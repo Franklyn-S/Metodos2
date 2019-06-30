@@ -9,11 +9,11 @@ using namespace std;
 
 //Biblioteca.cpp (Funções Auxiliares)
 double error(Ref<MatrixXd> A);
-void around(Ref<MatrixXd> Matriz, bool allElements);
+void around(Ref<MatrixXd> Matriz);
 void ordenar(Ref<MatrixXd> Matriz_Valor, Ref<MatrixXd> Matriz_Vetor);
 void sqrt_diagonal(Ref<MatrixXd> M);
 void igualarSinal(Ref<MatrixXd> MatrizA, Ref<MatrixXd> MatrizB);
-void inverteSinal(Ref<MatrixXd> MatrizA, int coluna);
+void inverteSinal(Ref<MatrixXd> vectorU, Ref<MatrixXd> vectorV,bool metodoU,bool metodoV);
 
 VectorXd zeros(int size);
 MatrixXd montar_Pij(Ref<MatrixXd> A, int i, int j);

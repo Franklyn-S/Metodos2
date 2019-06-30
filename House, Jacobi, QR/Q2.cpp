@@ -1,7 +1,9 @@
 #include "biblioteca.hpp"
 
 //g++ -c *.cpp -I eigen -std=c++11 && g++ -o q2 *.o && ./q2
+
 /*
+
 int main(){
 
 	MatrixXd A(5, 5);
@@ -30,10 +32,10 @@ int main(){
 	tie(It_J,H_J) = HouseHolder(A_J);
 	tie(valueJ, vectorJ) = jacobi(It_J, E, H_J);
 
-	around(It_J, false);
-	around(H_J, false);
-	around(valueJ, false);
-	around(vectorJ, false);
+	around(It_J);
+	around(H_J);
+	around(valueJ);
+	around(vectorJ);
 
 	ordenar(valueJ, vectorJ);
 
@@ -58,10 +60,10 @@ int main(){
 	tie(It_QR,H_QR) = HouseHolder(A_QR);
 	tie(valueQR, vectorQR) = QR(It_QR, E, H_QR);
 
-	around(It_QR, false);
-	around(H_QR, false);
-	around(valueQR, false);
-	around(vectorQR, false);
+	around(It_QR);
+	around(H_QR);
+	around(valueQR);
+	around(vectorQR);
 
 	ordenar(valueQR, vectorQR);
 
@@ -94,4 +96,5 @@ int main(){
 
 	return 0;
 }
+
 */

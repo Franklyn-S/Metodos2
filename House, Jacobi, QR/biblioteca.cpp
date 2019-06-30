@@ -59,12 +59,12 @@ MatrixXd calcular_Pij(Ref<MatrixXd> A, int i, int j){
 }
 
 //Aredonda Valores de uma Matriz 
-void around(Ref<MatrixXd> Matriz, bool allElements){
+void around(Ref<MatrixXd> Matriz){
 
 	for (int i = 0; i < Matriz.rows(); i++){
 		for(int j = 0; j < Matriz.cols(); j++){
 			
-		if (fabs(Matriz(i,j)) < 0.001 or allElements)
+		if (fabs(Matriz(i,j)) < 0.001)
 			Matriz(i,j) = round(Matriz(i,j));
 		}
 	}
@@ -145,11 +145,40 @@ void igualarSinal(Ref<MatrixXd> MatrizA, Ref<MatrixXd> MatrizB){
 
 }
 
-void inverteSinal(Ref<MatrixXd> MatrizA, int coluna){
-	for (int i = 0; i < MatrizA.cols(); i++){
+
+void inverteSinal(Ref<MatrixXd> vectorU, Ref<MatrixXd> vectorV,bool metodoU,bool metodoV){
+
+	int coluna;
+	if (metodoU) coluna = 1;
+	else coluna = 0;
+
+	for (int i = 0; i < vectorU.cols(); i++){
 		if (i == coluna){
-			for (int j = 0; j < MatrizA.rows(); j++){
-				MatrizA(j,i) = -1 * MatrizA(j,i);	
+			for (int j = 0; j < vectorU.rows(); j++){
+				vectorU(j,i) = -1 * vectorU(j,i);	
+			}
+		}
+	}
+
+
+	if (metodoV) coluna = 1;
+    else coluna = 0;
+
+    for (int i = 0; i < vectorV.cols(); i++){
+		if (i == coluna){
+			for (int j = 0; j < vectorV.rows(); j++){
+				vectorV(j,i) = -1 * vectorV(j,i);	
+			}
+		}
+	}
+
+
+	coluna = 2;
+
+ 	for (int i = 0; i < vectorV.cols(); i++){
+		if (i == coluna){
+			for (int j = 0; j < vectorV.rows(); j++){
+				vectorV(j,i) = -1 * vectorV(j,i);	
 			}
 		}
 	}

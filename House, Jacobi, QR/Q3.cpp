@@ -2,8 +2,6 @@
 
 //g++ -c *.cpp -I eigen -std=c++11 && g++ -o q2 *.o && ./q2
 
-
-
 int main(){
 
 	MatrixXd A(3, 5);
@@ -20,95 +18,94 @@ int main(){
 	int cols = A.cols();
 	
 	//---------------------------------- Metodo de Jacobi ------------------------------------
-	MatrixXd A_J(rows, cols);
-	MatrixXd H_J(rows, cols);
-	MatrixXd It_J(rows, cols);
-	MatrixXd valueJ(rows, cols);
-	MatrixXd vectorJ(rows, cols);
+	MatrixXd A_U(rows, cols);
+	MatrixXd H_U(rows, cols);
+	MatrixXd It_U(rows, cols);
+	MatrixXd valueU(rows, cols);
+	MatrixXd vectorU(rows, cols);
 
-	A_J = A*A.transpose();
-	tie(It_J,H_J) = HouseHolder(A_J);
-	tie(valueJ, vectorJ) = QR(It_J, E, H_J);
-	bool jacobiA_J = false;
+	A_U = A*A.transpose();
+	tie(It_U,H_U) = HouseHolder(A_U);
 
-	around(It_J, false);
-	around(H_J, false);
-	around(valueJ, false);
-	around(vectorJ, false);
+	// QR = 0 | Jacobi = 1
+	bool metodoU = 1;
+	tie(valueU, vectorU) = jacobi(It_U, E, H_U);
 
-	ordenar(valueJ, vectorJ);
+	around(It_U);
+	around(H_U);
+	around(valueU);
+	around(vectorU);
+
+	ordenar(valueU, vectorU);
 
 
 	IOFormat CleanFmt(4, 0, ", ", "\n", "│", "│");
 	cout << "\n" <<"---------------------------  Metodo de Jacobi --------------------------- " << "\n" << endl;
-	cout << "Matriz A*A_transposta" << endl << A_J.format(CleanFmt) << "\n" << endl;
-	cout << "Matriz Tridiagonal" << endl << It_J.format(CleanFmt) << "\n" << endl;
-	cout << "Matriz Acumulada" << endl << H_J.format(CleanFmt) << "\n" << endl;
-	cout << "Matriz de Autovalores: "<< endl << valueJ.format(CleanFmt) << "\n" << endl;
-	cout << "Matriz de Autovetores: " << endl << vectorJ.format(CleanFmt) << "\n" << endl;
+	cout << "Matriz A*A_transposta" << endl << A_U.format(CleanFmt) << "\n" << endl;
+	cout << "Matriz Tridiagonal" << endl << It_U.format(CleanFmt) << "\n" << endl;
+	cout << "Matriz Acumulada" << endl << H_U.format(CleanFmt) << "\n" << endl;
+	cout << "Matriz de Autovalores: "<< endl << valueU.format(CleanFmt) << "\n" << endl;
+	cout << "Matriz de Autovetores: " << endl << vectorU.format(CleanFmt) << "\n" << endl;
 
 	
 
 	//---------------------------------------- Metodo QR ------------------------------------
-	MatrixXd A_QR(rows, cols);
-	MatrixXd H_QR(rows, cols);
-	MatrixXd It_QR(rows, cols);
-	MatrixXd valueQR(rows, cols);
-	MatrixXd vectorQR(rows, cols);
+	MatrixXd A_V(rows, cols);
+	MatrixXd H_V(rows, cols);
+	MatrixXd It_V(rows, cols);
+	MatrixXd valueV(rows, cols);
+	MatrixXd vectorV(rows, cols);
 	
-	A_QR = A.transpose()*A;
-	tie(It_QR,H_QR) = HouseHolder(A_QR);
-	tie(valueQR, vectorQR) = QR(It_QR, E, H_QR);
-	bool jacobiA_QR = false;
+	A_V = A.transpose()*A;
+	tie(It_V,H_V) = HouseHolder(A_V);
 
-	around(It_QR, false);
-	around(H_QR, false);
-	around(valueQR, false);
-	around(vectorQR, false);
+	// QR = 0 | Jacobi = 1
+	bool metodoV = 0;
+	tie(valueV, vectorV) = QR(It_V, E, H_V);
+	
+	
 
-	ordenar(valueQR, vectorQR);
+	around(It_V);
+	around(H_V);
+	around(valueV);
+	around(vectorV);
+
+	ordenar(valueV, vectorV);
 
 
 	cout << "\n" <<"---------------------------------- Metodo QR ---------------------------------- " << "\n" << endl;
-	cout << "Matriz A_transposta*A" << endl << A_J.format(CleanFmt) << "\n" << endl;
-	cout << "Matriz Tridiagonal" << endl << It_QR.format(CleanFmt) << "\n" << endl;
-	cout << "Matriz Acumulada" << endl << H_QR.format(CleanFmt) << "\n" << endl;
-	cout << "Matriz de Autovalores: "<< endl << valueQR.format(CleanFmt) << "\n" << endl;
-	cout << "Matriz de Autovetores: " << endl << vectorQR.format(CleanFmt) << "\n" << endl;
+	cout << "Matriz A_transposta*A" << endl << A_U.format(CleanFmt) << "\n" << endl;
+	cout << "Matriz Tridiagonal" << endl << It_V.format(CleanFmt) << "\n" << endl;
+	cout << "Matriz Acumulada" << endl << H_V.format(CleanFmt) << "\n" << endl;
+	cout << "Matriz de Autovalores: "<< endl << valueV.format(CleanFmt) << "\n" << endl;
+	cout << "Matriz de Autovetores: " << endl << vectorV.format(CleanFmt) << "\n" << endl;
 
 
 	//---------------------------------------- RESULTADO ------------------------------------
 	
 	MatrixXd Sigma(3, 5);
 	MatrixXd aux(rows, cols);
+	
+	Sigma = MatrixXd::Zero(3,5);
 
-	Sigma <<
-	73.085,  	0,  	0,  	0,  	0,
-        0,   	37.541, 0,      0,     	0,
-        0 ,       0 ,  24.542 , 0,     	0;
+	for (int i = 0; i < 3; i++) 
+		Sigma(i,i) = valueU(i,i);
 
-	//Sigma = valueQR;
-	//sqrt_diagonal(Sigma);
+	sqrt_diagonal(Sigma);
 
-    if (jacobiA_J) inverteSinal(vectorJ, 1);
-	else inverteSinal(vectorJ, 0);
+    inverteSinal(vectorU,vectorV,metodoU,metodoV);
 
-    if (jacobiA_QR) inverteSinal(vectorQR, 1);
-    else inverteSinal(vectorQR, 0);
-    inverteSinal(vectorQR, 2);
+	aux = vectorU*Sigma*vectorV.transpose();
 
-	aux = vectorJ*Sigma*vectorQR.transpose();
-	around(aux, true);
 
 	cout << "\n" <<"---------------------------------- RESULTADO ---------------------------------- " << "\n" << endl;
 	
-	cout << "Matriz U: " << endl << vectorJ.format(CleanFmt) << "\n" << endl;
+	cout << "Matriz U: " << endl << vectorU.format(CleanFmt) << "\n" << endl;
 	cout << "Matriz Σ: " << endl << Sigma.format(CleanFmt) << "\n" << endl;
-	cout << "Matriz V: " << endl << vectorQR.format(CleanFmt) << "\n" << endl;
+	cout << "Matriz V: " << endl << vectorV.format(CleanFmt) << "\n" << endl;
 	cout << "Matriz A: " << endl << A.format(CleanFmt) << "\n" << endl;
 	cout << "Matriz U*Σ*(V^t): " << endl << aux.format(CleanFmt) << "\n" << endl;
 
 
 	return 0;
 }
-
