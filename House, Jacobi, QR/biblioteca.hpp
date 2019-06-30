@@ -8,11 +8,13 @@ using namespace Eigen;
 using namespace std;
 
 //Biblioteca.cpp (Funções Auxiliares)
-double error(Ref<MatrixXd> A); 													
-void around(Ref<MatrixXd> Matriz);
+double error(Ref<MatrixXd> A);
+void around(Ref<MatrixXd> Matriz, bool allElements);
 void ordenar(Ref<MatrixXd> Matriz_Valor, Ref<MatrixXd> Matriz_Vetor);
 void sqrt_diagonal(Ref<MatrixXd> M);
 void igualarSinal(Ref<MatrixXd> MatrizA, Ref<MatrixXd> MatrizB);
+void inverteSinal(Ref<MatrixXd> MatrizA, int coluna);
+
 VectorXd zeros(int size);
 MatrixXd montar_Pij(Ref<MatrixXd> A, int i, int j);
 MatrixXd calcular_Pij(Ref<MatrixXd> A, int i, int j);

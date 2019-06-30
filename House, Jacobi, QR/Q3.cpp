@@ -2,7 +2,7 @@
 
 //g++ -c *.cpp -I eigen -std=c++11 && g++ -o q2 *.o && ./q2
 
-/*
+
 
 int main(){
 
@@ -28,12 +28,13 @@ int main(){
 
 	A_J = A*A.transpose();
 	tie(It_J,H_J) = HouseHolder(A_J);
-	tie(valueJ, vectorJ) = jacobi(It_J, E, H_J);
+	tie(valueJ, vectorJ) = QR(It_J, E, H_J);
+	bool jacobiA_J = false;
 
-	around(It_J);
-	around(H_J);
-	around(valueJ);
-	around(vectorJ);
+	around(It_J, false);
+	around(H_J, false);
+	around(valueJ, false);
+	around(vectorJ, false);
 
 	ordenar(valueJ, vectorJ);
 
@@ -57,12 +58,13 @@ int main(){
 	
 	A_QR = A.transpose()*A;
 	tie(It_QR,H_QR) = HouseHolder(A_QR);
-	tie(valueQR, vectorQR) = jacobi(It_QR, E, H_QR);
+	tie(valueQR, vectorQR) = QR(It_QR, E, H_QR);
+	bool jacobiA_QR = false;
 
-	around(It_QR);
-	around(H_QR);
-	around(valueQR);
-	around(vectorQR);
+	around(It_QR, false);
+	around(H_QR, false);
+	around(valueQR, false);
+	around(vectorQR, false);
 
 	ordenar(valueQR, vectorQR);
 
@@ -88,7 +90,15 @@ int main(){
 	//Sigma = valueQR;
 	//sqrt_diagonal(Sigma);
 
+    if (jacobiA_J) inverteSinal(vectorJ, 1);
+	else inverteSinal(vectorJ, 0);
+
+    if (jacobiA_QR) inverteSinal(vectorQR, 1);
+    else inverteSinal(vectorQR, 0);
+    inverteSinal(vectorQR, 2);
+
 	aux = vectorJ*Sigma*vectorQR.transpose();
+	around(aux, true);
 
 	cout << "\n" <<"---------------------------------- RESULTADO ---------------------------------- " << "\n" << endl;
 	
@@ -102,4 +112,3 @@ int main(){
 	return 0;
 }
 
-*/

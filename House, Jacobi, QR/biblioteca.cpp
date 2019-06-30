@@ -29,7 +29,7 @@ MatrixXd montar_Pij(Ref<MatrixXd> A, int i, int j){
 	Pij = MatrixXd::Identity(rows, cols);
 
 	double t_aux = atan(A(i,j)/A(j,j));
-	double teta = (A(j,j) == 0) ? (M_PI/4) : t_aux;
+	double teta = (fabs(A(j,j)) < 0.000001) ? (M_PI/4) : t_aux;
 	
 	Pij(i,i) = cos(teta);
 	Pij(j,j) = cos(teta);
@@ -47,7 +47,7 @@ MatrixXd calcular_Pij(Ref<MatrixXd> A, int i, int j){
 	Pij = MatrixXd::Identity(rows, cols);
 
 	double t_aux = (0.5*atan( 2*A(i,j) / (A(j,j)-A(i,i)) ));
-	double teta = (A(i,i) == A(j,j)) ? (M_PI/4) : t_aux;
+	double teta = (fabs( A(j,j) ) - fabs(A(i,i) ) < 0.000001) ? (M_PI/4) : t_aux;
 	
 	Pij(i,i) = cos(teta);
 	Pij(j,j) = cos(teta);
@@ -59,12 +59,12 @@ MatrixXd calcular_Pij(Ref<MatrixXd> A, int i, int j){
 }
 
 //Aredonda Valores de uma Matriz 
-void around(Ref<MatrixXd> Matriz){
+void around(Ref<MatrixXd> Matriz, bool allElements){
 
 	for (int i = 0; i < Matriz.rows(); i++){
 		for(int j = 0; j < Matriz.cols(); j++){
 			
-		if (fabs(Matriz(i,j)) < 0.001)
+		if (fabs(Matriz(i,j)) < 0.001 or allElements)
 			Matriz(i,j) = round(Matriz(i,j));
 		}
 	}
@@ -144,3 +144,15 @@ void igualarSinal(Ref<MatrixXd> MatrizA, Ref<MatrixXd> MatrizB){
 	}
 
 }
+
+void inverteSinal(Ref<MatrixXd> MatrizA, int coluna){
+	for (int i = 0; i < MatrizA.cols(); i++){
+		if (i == coluna){
+			for (int j = 0; j < MatrizA.rows(); j++){
+				MatrizA(j,i) = -1 * MatrizA(j,i);	
+			}
+		}
+	}
+
+}
+
