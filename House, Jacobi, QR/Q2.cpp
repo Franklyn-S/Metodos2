@@ -1,7 +1,7 @@
 #include "biblioteca.hpp"
 
 //g++ -c *.cpp -I eigen -std=c++11 && g++ -o q2 *.o && ./q2
-/*
+
 int main(){
 
 	MatrixXd A(5, 5);
@@ -88,10 +88,9 @@ int main(){
 	cout << "\n" <<"---------------------------------- RESULTADO ---------------------------------- " << "\n" << endl;
 	cout << "Matriz U: " << endl << vectorJ.format(CleanFmt) << "\n" << endl;
 	cout << "Matriz Σ: " << endl << Sigma.format(CleanFmt) << "\n" << endl;
-	cout << "Matriz V: " << endl << (vectorQR.transpose()).format(CleanFmt) << "\n" << endl;
+	cout << "Matriz V: " << endl << vectorQR.format(CleanFmt) << "\n" << endl;
 	cout << "Matriz A: " << endl << A.format(CleanFmt) << "\n" << endl;
 	cout << "Matriz U*Σ*(V^t): " << endl << aux.format(CleanFmt) << "\n" << endl;
 
 	return 0;
 }
-*/

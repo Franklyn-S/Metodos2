@@ -47,7 +47,7 @@ MatrixXd calcular_Pij(Ref<MatrixXd> A, int i, int j){
 	Pij = MatrixXd::Identity(rows, cols);
 
 	double t_aux = (0.5*atan( 2*A(i,j) / (A(j,j)-A(i,i)) ));
-	double teta = (fabs( A(j,j) ) - fabs(A(i,i) ) < 0.000001) ? (M_PI/4) : t_aux;
+	double teta = (fabs( A(j,j) ) - fabs( A(i,i) ) < 0.000001) ? (M_PI/4) : t_aux;
 	
 	Pij(i,i) = cos(teta);
 	Pij(j,j) = cos(teta);
