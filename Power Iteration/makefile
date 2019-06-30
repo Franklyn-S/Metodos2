@@ -2,23 +2,20 @@
 
 all: principal
 
-principal: programaprincipal.o potenciaregular.o potenciainversa.o potenciadeslocamento.o lu.o
+principal: todos
 	g++ ProgramaPrincipal.o PotenciaRegular.o PotenciaInversa.o PotenciaDeslocamento.o LU.o -o principal
 
-potenciaregular.o: PotenciaRegular.cpp
-	g++ -c PotenciaRegular.cpp
+todos: PotenciaRegular.cpp PotenciaInversa.cpp PotenciaDeslocamento.cpp ProgramaPrincipal.cpp LU.cpp
+	g++ -c PotenciaRegular.cpp PotenciaInversa.cpp PotenciaDeslocamento.cpp ProgramaPrincipal.cpp LU.cpp
 
-potenciainversa.o: PotenciaInversa.cpp LU.cpp
-	g++ -c PotenciaInversa.cpp LU.cpp
 
-potenciadeslocamento.o: PotenciaDeslocamento.cpp PotenciaInversa.cpp
-	g++ -c PotenciaDeslocamento.cpp PotenciaInversa.cpp 
+questao1: principal2
 
-programaprincipal.o: ProgramaPrincipal.cpp
-	g++ -c ProgramaPrincipal.cpp
+principal2: todos2
+	g++  PotenciaRegular.o PotenciaInversa.o LU.o 1Q.o -o questao1
 
-lu.o: LU.cpp
-	g++ -c LU.cpp
+todos2:  PotenciaRegular.cpp PotenciaInversa.cpp LU.cpp 1Q.cpp
+	g++ -c PotenciaRegular.cpp PotenciaInversa.cpp LU.cpp 1Q.cpp
 	
 clean:
 	rm -rf *.o *~ principal
