@@ -1,6 +1,6 @@
 #ifndef LU_H
 #define LU_H
-#include "eigen/Eigen/Core"
+#include "../eigenLib/Eigen/Core"
 using namespace Eigen;
 
 class LU{

@@ -1,6 +1,6 @@
 #ifndef POTENCIADESLOCAMENTO_H
 #define POTENCIADESLOCAMENTO_H
-#include "eigen/Eigen/Core"
+#include "../eigenLib/Eigen/Core"
 #include "PotenciaInversa.hpp"
 using namespace Eigen;
 
