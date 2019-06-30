@@ -1,25 +1,37 @@
 #include "biblioteca.hpp"
 
-//g++ -c *.cpp -I eigen -std=c++11 && g++ -o q2 *.o && ./q2
-
-/*
+//g++ -c *.cpp -I eigen -std=c++11 && g++ -o main *.o && ./main
 
 int main(){
 
+	/*
+	// Matriz da Questão 2	
+	MatrixXd A(5, 5);
+	A <<
+	 		40, 3, 9, 7, 8,
+		 	3, 23, 4, 7, 12,
+		 	9, 4, 65, 16, 15,
+		 	7, 7, 16, 37, 12,
+			8, 12, 15, 12, 51;
+	
+	*/
+
+	// Matriz da Questão 3	
 	MatrixXd A(3, 5);
 	A <<
 	 		40, 3, 9, 7, 8,
 		 	3, 23, 4, 7, 12,
 		 	9, 4, 65, 16, 15;
+	
 
 
 	//Erro
 	double E = 0.0001;
 
-	int rows = A.rows();
-	int cols = A.cols();
+	int rows = 5;
+	int cols = 5;
 	
-	//---------------------------------- Metodo de Jacobi ------------------------------------
+	//--------------------------- Achar Matriz U pelo Metodo de Jacobi ------------------------------------
 	MatrixXd A_U(rows, cols);
 	MatrixXd H_U(rows, cols);
 	MatrixXd It_U(rows, cols);
@@ -51,7 +63,7 @@ int main(){
 
 	
 
-	//---------------------------------------- Metodo QR ------------------------------------
+	//------------------------------- Achar Matriz V pelo Metodo QR ------------------------------------
 	MatrixXd A_V(rows, cols);
 	MatrixXd H_V(rows, cols);
 	MatrixXd It_V(rows, cols);
@@ -83,22 +95,31 @@ int main(){
 	cout << "Matriz de Autovetores: " << endl << vectorV.format(CleanFmt) << "\n" << endl;
 
 
-	//---------------------------------------- RESULTADO ------------------------------------
+	//---------------------------------------- SIGMA QUESTÃO 2 ------------------------------------
 	
-	MatrixXd Sigma(3, 5);
-	MatrixXd aux(rows, cols);
+	/*
+	MatrixXd Sigma(rows, cols);
+	Sigma = valueU;
 	
-	Sigma = MatrixXd::Zero(3,5);
+	igualarSinal(vectorU, vectorV);
+	*/
 
+	//---------------------------------------- SIGMA QUESTÃO 3------------------------------------
+	
+
+	MatrixXd Sigma(3, 5);
+	Sigma = MatrixXd::Zero(3,5);
 	for (int i = 0; i < 3; i++) 
 		Sigma(i,i) = valueU(i,i);
 
-	sqrt_diagonal(Sigma);
-
     inverteSinal(vectorU,vectorV,metodoU,metodoV);
 
-	aux = vectorU*Sigma*vectorV.transpose();
 
+	//---------------------------------------- RESULTADO ------------------------------------s
+
+    sqrt_diagonal(Sigma);
+    MatrixXd aux(rows, cols);
+    aux = vectorU*Sigma*vectorV.transpose();
 
 	cout << "\n" <<"---------------------------------- RESULTADO ---------------------------------- " << "\n" << endl;
 	
@@ -111,5 +132,3 @@ int main(){
 
 	return 0;
 }
-
-*/
