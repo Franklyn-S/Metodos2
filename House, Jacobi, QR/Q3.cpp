@@ -1,6 +1,6 @@
 #include "biblioteca.hpp"
 
-//g++ -c *.cpp -I eigen -std=c++11 && g++ -o q2 *.o && ./q2
+//g++ -c *.cpp -I eigen -std=c++11 && g++ -o q3 *.o && ./q3
 
 
 
