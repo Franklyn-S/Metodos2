@@ -1,6 +1,6 @@
 #ifndef POTENCIAINVERSA_H
 #define POTENCIAINVERSA_H
-#include "eigen/Eigen/Core"
+#include "../eigenLib/Eigen/Core"
 #include "LU.hpp"
 using namespace Eigen;
 

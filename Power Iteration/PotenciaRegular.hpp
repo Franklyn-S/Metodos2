@@ -1,6 +1,6 @@
 #ifndef POTENCIAREGULAR_H
 #define POTENCIAREGULAR_H
-#include "eigen/Eigen/Core"
+#include "../eigenLib/Eigen/Core"
 using namespace Eigen;
 
 class PotenciaRegular{
