@@ -2,9 +2,10 @@
 
 //g++ -c *.cpp -I eigen -std=c++11 && g++ -o main *.o && ./main
 
+//g++ -c *.cpp && g++ -o main *.o && ./main
+
 int main(){
 
-	/*
 	// Matriz da Questão 2	
 	MatrixXd A(5, 5);
 	A <<
@@ -14,15 +15,15 @@ int main(){
 		 	7, 7, 16, 37, 12,
 			8, 12, 15, 12, 51;
 	
-	*/
 
+	/*
 	// Matriz da Questão 3	
 	MatrixXd A(3, 5);
 	A <<
 	 		40, 3, 9, 7, 8,
 		 	3, 23, 4, 7, 12,
 		 	9, 4, 65, 16, 15;
-	
+	*/
 
 
 	//Erro
@@ -77,8 +78,6 @@ int main(){
 	bool metodoV = 0;
 	tie(valueV, vectorV) = QR(It_V, E, H_V);
 	
-	
-
 	around(It_V);
 	around(H_V);
 	around(valueV);
@@ -97,25 +96,25 @@ int main(){
 
 	//---------------------------------------- SIGMA QUESTÃO 2 ------------------------------------
 	
-	/*
+
 	MatrixXd Sigma(rows, cols);
 	Sigma = valueU;
 	
 	igualarSinal(vectorU, vectorV);
-	*/
+
 
 	//---------------------------------------- SIGMA QUESTÃO 3------------------------------------
 	
-
+/*
 	MatrixXd Sigma(3, 5);
 	Sigma = MatrixXd::Zero(3,5);
 	for (int i = 0; i < 3; i++) 
 		Sigma(i,i) = valueU(i,i);
 
     inverteSinal(vectorU,vectorV,metodoU,metodoV);
+*/
 
-
-	//---------------------------------------- RESULTADO ------------------------------------s
+	//------------------------------------------- RESULTADO ---------------------------------------
 
     sqrt_diagonal(Sigma);
     MatrixXd aux(rows, cols);
@@ -130,5 +129,36 @@ int main(){
 	cout << "Matriz U*Σ*(V^t): " << endl << aux.format(CleanFmt) << "\n" << endl;
 
 
+	//----------------------------------------- Outras Provas -----------------------------------
+	//------------------------------------ A * At * U = U * Σ * Σt  -----------------------------
+	//------------------------------------ At * A * V = V * Σt * Σ  -----------------------------
+
+	/*
+
+	MatrixXd A_At_U(rows,cols);
+	MatrixXd U_S_St(rows,cols);
+	MatrixXd At_A_V(rows,cols);
+	MatrixXd V_St_S(rows,cols);
+
+	A_At_U = A * A.transpose() * vectorU;
+	U_S_St = vectorU * Sigma * Sigma.transpose();
+	At_A_V = A.transpose() * A * vectorV;
+	V_St_S = vectorV * Sigma.transpose() * Sigma;
+
+	around(A_At_U);
+	around(U_S_St);
+	around(At_A_V);
+	around(V_St_S);
+
+	cout << "\n" <<"---------- A * At * U = U * Σ * Σt ---------- " << "\n" << endl;
+	cout << "A * At * U " << endl <<A_At_U.format(CleanFmt) << "\n" << endl;
+	cout << "U * Σ * Σt" << endl <<U_S_St.format(CleanFmt) << "\n" << endl;
+	cout << "\n" <<"---------- At * A * V = V * Σt * Σ ----------" << "\n" << endl;
+	cout << "At * A * V " << endl <<At_A_V.format(CleanFmt) << "\n" << endl;
+	cout << "V * Σt * Σ" << endl <<V_St_S.format(CleanFmt) << "\n" << endl;
+
+	*/
+	
 	return 0;
 }
+
