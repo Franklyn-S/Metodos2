@@ -12,6 +12,18 @@ int main(void){
 
         int tamanho = 5;
 
+        VectorXd matricula(6);
+        matricula << 3,9,7,8,4,7;
+
+        // Matriz Arbitrária da Questão 2
+        MatrixXf A(tamanho,tamanho);
+        A << 
+                30+matricula(0)+matricula(5), matricula(0), matricula(1), matricula(2), matricula(3),
+                matricula(0), 10+matricula(1)+matricula(4), matricula(4), matricula(5), matricula(0)+matricula(1),
+                matricula(1), matricula(4), 50+matricula(2)+matricula(3), matricula(1)+matricula(2), matricula(2)+matricula(3),
+                matricula(2), matricula(5), matricula(1)+matricula(2), 40-matricula(0), matricula(3)+matricula(4),
+                matricula(3), matricula(0)+matricula(1), matricula(2)+matricula(3), matricula(3)+matricula(4), 60-matricula(1);
+        /*
         MatrixXf A(tamanho,tamanho);
         A <<
         40, 3, 9, 7, 8,
@@ -19,7 +31,8 @@ int main(void){
         9, 4, 65, 16, 15,
         7, 7, 16, 37, 12,
         8, 12, 15, 12, 51;
-
+        */
+        
         VectorXf vetor_inicial(tamanho);
         vetor_inicial << 1,1,1,1,1;
 
