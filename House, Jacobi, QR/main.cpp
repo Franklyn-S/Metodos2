@@ -7,6 +7,17 @@
 int main(){
 
 	// Matriz da Questão 2	
+/*
+	// Matricula Daniel
+	MatrixXd A(5, 5);
+	A <<
+	 		42, 3, 7, 4, 1,
+        	3, 23, 6, 9, 10,
+        	7, 6, 55, 11, 5,
+        	4, 9, 11, 37, 7,
+        	1, 10, 5, 7, 53;
+
+	// Matricula Franklyn
 	MatrixXd A(5, 5);
 	A <<
 	 		40, 3, 9, 7, 8,
@@ -14,16 +25,25 @@ int main(){
 		 	9, 4, 65, 16, 15,
 		 	7, 7, 16, 37, 12,
 			8, 12, 15, 12, 51;
-	
+*/	
 
-	/*
-	// Matriz da Questão 3	
+
+	// Matriz da Questão 3
+
+	// Matricula Daniel
+	MatrixXd A(3, 5);
+	A <<
+			42, 3, 7, 4, 1,
+        	3, 23, 6, 9, 10,
+        	7, 6, 55, 11, 5;
+/*
+	// Matricula Franklyn
 	MatrixXd A(3, 5);
 	A <<
 	 		40, 3, 9, 7, 8,
 		 	3, 23, 4, 7, 12,
 		 	9, 4, 65, 16, 15;
-	*/
+*/	
 
 
 	//Erro
@@ -96,23 +116,23 @@ int main(){
 
 	//---------------------------------------- SIGMA QUESTÃO 2 ------------------------------------
 	
-
+/*
 	MatrixXd Sigma(rows, cols);
 	Sigma = valueU;
 	
 	igualarSinal(vectorU, vectorV);
-
+*/
 
 	//---------------------------------------- SIGMA QUESTÃO 3------------------------------------
 	
-/*
+
 	MatrixXd Sigma(3, 5);
 	Sigma = MatrixXd::Zero(3,5);
 	for (int i = 0; i < 3; i++) 
 		Sigma(i,i) = valueU(i,i);
 
     inverteSinal(vectorU,vectorV,metodoU,metodoV);
-*/
+
 
 	//------------------------------------------- RESULTADO ---------------------------------------
 
