@@ -44,14 +44,14 @@ while True:
     x_old = x
     #valores iniciais
     x = (E+F) % 3
-    y = 0
+    v = 0
     t = 0
     for i in range(n):
 
         k1v = h * Function(t,v,x)
         k1x = h * v
-        print("k1v: {}".format(k1v))
-        print("k1x: {}".format(k1x))
+        #print("k1v: {}".format(k1v))
+        #print("k1x: {}".format(k1x))
 
         k2v = h * Function( (t + h/2), (v+ k1v/2), (x + k1x/2) )
         k2x = h * (v+ k1v/2)
@@ -67,8 +67,8 @@ while True:
         
         print("{} v(1.2): {}".format(i, v))
         print("{} x(1.2): {}".format(i, x))   
-
     t += h
+
     erroRelativo = abs(x - x_old)/abs(x)
     if (erroRelativo < e):
         aux += 1
