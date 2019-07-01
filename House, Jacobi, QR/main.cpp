@@ -1,4 +1,5 @@
 #include "biblioteca.hpp"
+#include <string>	
 
 //g++ -c *.cpp -I eigen -std=c++11 && g++ -o main *.o && ./main
 
@@ -6,7 +7,31 @@
 
 int main(){
 
+	VectorXd matricula(6);
+	matricula << 3,9,7,8,4,7;
+
+	// Matriz Arbitrária da Questão 2
+	MatrixXd A(5,5);
+	A << 
+		30+matricula(0)+matricula(5), matricula(0), matricula(1), matricula(2), matricula(3),
+		matricula(0), 10+matricula(1)+matricula(4), matricula(4), matricula(5), matricula(0)+matricula(1),
+		matricula(1), matricula(4), 50+matricula(2)+matricula(3), matricula(1)+matricula(2), matricula(2)+matricula(3),
+		matricula(2), matricula(5), matricula(1)+matricula(2), 40-matricula(0), matricula(3)+matricula(4),
+		matricula(3), matricula(0)+matricula(1), matricula(2)+matricula(3), matricula(3)+matricula(4), 60-matricula(1);
+
+
+	// Matriz Arbitrária da Questão 3
+	/*
+	MatrixXd A(3,5);
+	A << 
+		30+matricula(0)+matricula(5), matricula(0), matricula(1), matricula(2), matricula(3),
+		matricula(0), 10+matricula(1)+matricula(4), matricula(4), matricula(5), matricula(0)+matricula(1),
+		matricula(1), matricula(4), 50+matricula(2)+matricula(3), matricula(1)+matricula(2), matricula(2)+matricula(3);
+
+	*/
+
 	// Matriz da Questão 2	
+	/*
 	MatrixXd A(5, 5);
 	A <<
 	 		40, 3, 9, 7, 8,
@@ -14,10 +39,11 @@ int main(){
 		 	9, 4, 65, 16, 15,
 		 	7, 7, 16, 37, 12,
 			8, 12, 15, 12, 51;
-	
+	*/
 
-	/*
+	
 	// Matriz da Questão 3	
+	/*
 	MatrixXd A(3, 5);
 	A <<
 	 		40, 3, 9, 7, 8,
@@ -27,7 +53,7 @@ int main(){
 
 
 	//Erro
-	double E = 0.0001;
+	double E = 0.001;
 
 	int rows = 5;
 	int cols = 5;
