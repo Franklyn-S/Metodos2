@@ -29,6 +29,7 @@ double Function::laguerreType(double x)
 
 double Function::chebyshevType(double x)
 {
+  // (1/sqrt(1.0 - pow(x, 2.0)))
   // f(x)/((1-x²)^1/2), with f(x) = x²
-  return pow(x, 2)/sqrt(1 - pow(x, 2));
+  return 3*pow(x, 2.0);
 }
