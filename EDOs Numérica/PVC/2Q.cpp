@@ -6,15 +6,15 @@ using namespace std;
 int main(void){
     
     VectorXf matricula(6);
-    matricula << 3,9,7,8,4,7;
+    matricula << 4,3,3,3,8,3;
     int A=matricula[0],B=matricula[1],C=matricula[2],D=matricula[3],E=matricula[4],F=matricula[5];
     
     //Numero de Particoes
     int N = 4 + (A + B + C + D + E + F) % 4;
     //Tensao
-    int T = (A + B + C);
+    float T = (A + B + C);
     //Pressao
-    int P = (D + E + F);
+    float P = (D + E + F);
 
     // CCE = Condicão de Contorno Esquerda
     // CCD = Condição de Contorno Direita
@@ -33,7 +33,7 @@ int main(void){
     //Vetor P
     VectorXf vetorP(N-1);
     for(int i = 0; i<N-1; i++){
-        vetorP[i] = -P/T; 
+        vetorP[i] = (-P/T); 
     }
 
     cout << "----- Dados da Questão -----" << endl << endl;
