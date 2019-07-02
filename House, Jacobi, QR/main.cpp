@@ -31,7 +31,7 @@ int main(){
 
 	/*
 
-	MatrixXd A(3, 5);
+	MatrixXd A(5, 5);
 	A <<
 	 		40, 3, 9, 7, 8,
 		 	3, 23, 4, 7, 12,
