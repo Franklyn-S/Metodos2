@@ -3,8 +3,6 @@
 
 //g++ -c *.cpp -I eigen -std=c++11 && g++ -o main *.o && ./main
 
-//g++ -c *.cpp && g++ -o main *.o && ./main
-
 int main(){
 
 	VectorXd matricula(6);
