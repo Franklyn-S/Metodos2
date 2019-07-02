@@ -148,11 +148,12 @@ void inverteSinal(Ref<MatrixXd> MatrizA, int coluna){
 void consertaSinal(Ref<MatrixXd> A, Ref<MatrixXd> V, Ref<MatrixXd> U, Ref<MatrixXd> S){
 	MatrixXd AV = A * V;
 	MatrixXd US = U * S;
+
 	bool inverter = false;
 
 	for (int j = 0; j < AV.cols(); j++){
 		for (int i = 0; i < AV.rows(); i++){
-			if (fabs( AV(i, j) - US(i, j) ) > 1) {
+			if (round(AV(i, j)) != round(US(i, j))) {
 				inverter = true;
 			}
 		}
