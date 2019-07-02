@@ -15,17 +15,22 @@ int main(int argc, char const *argv[])
   GaussHermite gaussHermite;
   GaussChebyshev gaussChebyshev;
   
-  // std::cout << newtonCotes.openedToleranceNewtonCotesDegree1(function, 0, 0.8, 0.00001) << std::endl;
+  // std::cout << newtonCotes.openedToleranceNewtonCotesDegree4(function, -2, 2, 0.0001) << std::endl;
+  // std::cout << newtonCotes.closedToleranceNewtonCotesDegree4(function, -2, 2, 0.0001) << std::endl;
   
-  // std::cout << gaussLegendre.gaussLegendre2Points(function, 0, 0.8) << std::endl;
-  // std::cout << gaussLegendre.gaussLegendre3Points(function, 0, 0.8) << std::endl;
-  // std::cout << gaussLegendre.gaussLegendre4Points(function, 0, 0.8) << std::endl;
+  // std::cout << gaussLegendre.gaussLegendreTolerance2Points(function, -2, 2, 0.0001) << std::endl;
+  // std::cout << gaussLegendre.gaussLegendreTolerance3Points(function, -2, 2, 0.0001) << std::endl;
+  // std::cout << gaussLegendre.gaussLegendreTolerance4Points(function, -2, 2, 0.0001) << std::endl;
+
+  // std::cout << gaussHermite.gaussHermite2Points(function) << std::endl;
+  // std::cout << gaussHermite.gaussHermite3Points(function) << std::endl;
+  // std::cout << gaussHermite.gaussHermite4Points(function) << std::endl;
 
   // std::cout << gaussLaguerre.gaussLaguerre2Points(function) << std::endl;
   // std::cout << gaussLaguerre.gaussLaguerre3Points(function) << std::endl;
   // std::cout << gaussLaguerre.gaussLaguerre4Points(function) << std::endl;
 
-  std::cout << gaussChebyshev.gaussChebyshevNPoints(function, 2) << std::endl;
+  // std::cout << gaussChebyshev.gaussChebyshevNPoints(function, 30) << std::endl;
 
   return 0;
 }

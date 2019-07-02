@@ -63,431 +63,242 @@ double NewtonCotes::basicClosedNewtonCotesDegree4(Function function, double a, d
 // Polynoms with Tolerance:
 // Opened Philosophies
 // Degree 1
-double NewtonCotes::openedToleranceNewtonCotesDegree1(Function function, double a, double b, double tolerance){
-  double step, stepForward, aux, h, delta, x0, x1;
-  int N;
+double NewtonCotes::openedToleranceNewtonCotesDegree1(Function function, double a, double b, double tolerance)
+{
+  double current, anterior, sum, delta, x0, x1;
   
-  // Initial value of partitions
-  abs(log(tolerance)/log(10)) < 1 ? N = 10 : N = pow(10, abs(log(tolerance)/log(10)));
-  h = (b-a)/N;
+  current = 0.1;
+  anterior = 100;
 
-  // Calculate the first step
-  step = 0;
-  for (int i=0; i <= N; i++) {
-    x0 = a + i*h;
-    x1 = x0 + h;
+  // Initial number of partitions
+  int N = 1;
+  
+  while (fabs((current - anterior)/current) > tolerance) {
+    N *= 2;
+    sum = 0;
+    delta = (b-a)/N;
 
-    step += basicOpenedNewtonCotesDegree1(function, x0, x1, h);
-  }
+    for (int i=0; i < N; i++) {
+      x0 = a + i*delta;
+      x1 = x0 + delta;
 
-  // Increasing the number of partitions
-  N *= 10;
-  h = (b-a)/N;
-
-  // Calculate the second step
-  stepForward = 0;
-  for (int i=0; i <= N; i++) {
-    x0 = a + i*h;
-    x1 = x0 + h;
-    
-    stepForward += basicOpenedNewtonCotesDegree1(function, x0, x1, h);
-  }
-
-  // If the initial number of partitions don't work, increase then until the tolerance as reached
-  while (fabs(step - stepForward)/step > tolerance) {
-    // Increasing the number of partitions
-    N *= 10;
-    h = (b-a)/N;
-    
-    // Setting the steps
-    step = stepForward;
-    stepForward = 0;
-
-    for (int i=0; i <= N; i++) {
-      x0 = a + i*h;
-      x1 = x0 + h;
-      
-      stepForward += basicOpenedNewtonCotesDegree1(function, x0, x1, h);
+      sum += basicOpenedNewtonCotesDegree1(function, x0, x1, delta);
     }
-  }
 
-  // Returning the correct answer
-  return stepForward;
+    anterior = current;
+    current = sum;
+  }
+  
+  return current;
 }
 
 // Degree 2
-double NewtonCotes::openedToleranceNewtonCotesDegree2(Function function, double a, double b, double tolerance){
-  double step, stepForward, aux, h, delta, x0, x1;
-  int N;
+double NewtonCotes::openedToleranceNewtonCotesDegree2(Function function, double a, double b, double tolerance)
+{
+  double current, anterior, sum, delta, x0, x1;
   
-  // Initial value of partitions
-  abs(log(tolerance)/log(10)) < 1 ? N = 10 : N = pow(10, abs(log(tolerance)/log(10)));
-  h = (b-a)/N;
+  current = 0.1;
+  anterior = 100;
 
-  // Calculate the first step
-  step = 0;
-  for (int i=0; i <= N; i++) {
-    x0 = a + i*h;
-    x1 = x0 + h;
+  // Initial number of partitions
+  int N = 1;
+  
+  while (fabs((current - anterior)/current) > tolerance) {
+    N *= 2;
+    sum = 0;
+    delta = (b-a)/N;
 
-    step += basicOpenedNewtonCotesDegree2(function, x0, x1, h);
-  }
+    for (int i=0; i < N; i++) {
+      x0 = a + i*delta;
+      x1 = x0 + delta;
 
-  // Increasing the number of partitions
-  N *= 10;
-  h = (b-a)/N;
-
-  // Calculate the second step
-  stepForward = 0;
-  for (int i=0; i <= N; i++) {
-    x0 = a + i*h;
-    x1 = x0 + h;
-    
-    stepForward += basicOpenedNewtonCotesDegree2(function, x0, x1, h);
-  }
-
-  // If the initial number of partitions don't work, increase then until the tolerance as reached
-  while (fabs(step - stepForward)/step > tolerance) {
-    // Increasing the number of partitions
-    N *= 10;
-    h = (b-a)/N;
-    
-    // Setting the steps
-    step = stepForward;
-    stepForward = 0;
-
-    for (int i=0; i <= N; i++) {
-      x0 = a + i*h;
-      x1 = x0 + h;
-      
-      stepForward += basicOpenedNewtonCotesDegree2(function, x0, x1, h);
+      sum += basicOpenedNewtonCotesDegree2(function, x0, x1, delta);
     }
-  }
 
-  // Returning the correct answer
-  return stepForward;
+    anterior = current;
+    current = sum;
+  }
+  
+  return current;
 }
 
 // Degree 3
-double NewtonCotes::openedToleranceNewtonCotesDegree3(Function function, double a, double b, double tolerance){
-  double step, stepForward, aux, h, delta, x0, x1;
-  int N;
+double NewtonCotes::openedToleranceNewtonCotesDegree3(Function function, double a, double b, double tolerance)
+{
+  double current, anterior, sum, delta, x0, x1;
   
-  // Initial value of partitions
-  abs(log(tolerance)/log(10)) < 1 ? N = 10 : N = pow(10, abs(log(tolerance)/log(10)));
-  h = (b-a)/N;
+  current = 0.1;
+  anterior = 100;
 
-  // Calculate the first step
-  step = 0;
-  for (int i=0; i <= N; i++) {
-    x0 = a + i*h;
-    x1 = x0 + h;
+  // Initial number of partitions
+  int N = 1;
+  
+  while (fabs((current - anterior)/current) > tolerance) {
+    N *= 2;
+    sum = 0;
+    delta = (b-a)/N;
 
-    step += basicOpenedNewtonCotesDegree3(function, x0, x1, h);
-  }
+    for (int i=0; i < N; i++) {
+      x0 = a + i*delta;
+      x1 = x0 + delta;
 
-  // Increasing the number of partitions
-  N *= 10;
-  h = (b-a)/N;
-
-  // Calculate the second step
-  stepForward = 0;
-  for (int i=0; i <= N; i++) {
-    x0 = a + i*h;
-    x1 = x0 + h;
-    
-    stepForward += basicOpenedNewtonCotesDegree3(function, x0, x1, h);
-  }
-
-  // If the initial number of partitions don't work, increase then until the tolerance as reached
-  while (fabs(step - stepForward)/step > tolerance) {
-    // Increasing the number of partitions
-    N *= 10;
-    h = (b-a)/N;
-    
-    // Setting the steps
-    step = stepForward;
-    stepForward = 0;
-
-    for (int i=0; i <= N; i++) {
-      x0 = a + i*h;
-      x1 = x0 + h;
-      
-      stepForward += basicOpenedNewtonCotesDegree3(function, x0, x1, h);
+      sum += basicOpenedNewtonCotesDegree3(function, x0, x1, delta);
     }
-  }
 
-  // Returning the correct answer
-  return stepForward;
+    anterior = current;
+    current = sum;
+  }
+  
+  return current;
 }
 
 // Degree 4
-double NewtonCotes::openedToleranceNewtonCotesDegree4(Function function, double a, double b, double tolerance){
-  double step, stepForward, aux, h, delta, x0, x1;
-  int N;
+double NewtonCotes::openedToleranceNewtonCotesDegree4(Function function, double a, double b, double tolerance)
+{
+  double current, anterior, sum, delta, x0, x1;
   
-  // Initial value of partitions
-  abs(log(tolerance)/log(10)) < 1 ? N = 10 : N = pow(10, abs(log(tolerance)/log(10)));
-  h = (b-a)/N;
+  current = 0.1;
+  anterior = 100;
 
-  // Calculate the first step
-  step = 0;
-  for (int i=0; i <= N; i++) {
-    x0 = a + i*h;
-    x1 = x0 + h;
+  // Initial number of partitions
+  int N = 1;
+  
+  while (fabs((current - anterior)/current) > tolerance) {
+    N *= 2;
+    sum = 0;
+    delta = (b-a)/N;
 
-    step += basicOpenedNewtonCotesDegree4(function, x0, x1, h);
-  }
+    for (int i=0; i < N; i++) {
+      x0 = a + i*delta;
+      x1 = x0 + delta;
 
-  // Increasing the number of partitions
-  N *= 10;
-  h = (b-a)/N;
-
-  // Calculate the second step
-  stepForward = 0;
-  for (int i=0; i <= N; i++) {
-    x0 = a + i*h;
-    x1 = x0 + h;
-    
-    stepForward += basicOpenedNewtonCotesDegree4(function, x0, x1, h);
-  }
-
-  // If the initial number of partitions don't work, increase then until the tolerance as reached
-  while (fabs(step - stepForward)/step > tolerance) {
-    // Increasing the number of partitions
-    N *= 10;
-    h = (b-a)/N;
-    
-    // Setting the steps
-    step = stepForward;
-    stepForward = 0;
-
-    for (int i=0; i <= N; i++) {
-      x0 = a + i*h;
-      x1 = x0 + h;
-      
-      stepForward += basicOpenedNewtonCotesDegree4(function, x0, x1, h);
+      sum += basicOpenedNewtonCotesDegree4(function, x0, x1, delta);
     }
-  }
 
-  // Returning the correct answer
-  return stepForward;
+    anterior = current;
+    current = sum;
+  }
+  
+  return current;
 }
 
 // Closed Philosophies
 // Degree 1
 double NewtonCotes::closedToleranceNewtonCotesDegree1(Function function, double a, double b, double tolerance)
 {
-  double step, stepForward, aux, h, delta, x0, x1;
-  int N;
+  double current, anterior, sum, delta, x0, x1;
   
-  // Initial value of partitions
-  abs(log(tolerance)/log(10)) < 1 ? N = 10 : N = pow(10, abs(log(tolerance)/log(10)));
-  h = (b-a)/N;
+  current = 0.1;
+  anterior = 100;
 
-  // Calculate the first step
-  step = 0;
-  for (int i=0; i <= N; i++) {
-    x0 = a + i*h;
-    x1 = x0 + h;
+  // Initial number of partitions
+  int N = 1;
+  
+  while (fabs((current - anterior)/current) > tolerance) {
+    N *= 2;
+    sum = 0;
+    delta = (b-a)/N;
 
-    step += basicClosedNewtonCotesDegree1(function, x0, x1);
-  }
+    for (int i=0; i < N; i++) {
+      x0 = a + i*delta;
+      x1 = x0 + delta;
 
-  // Increasing the number of partitions
-  N *= 10;
-  h = (b-a)/N;
-
-  // Calculate the second step
-  stepForward = 0;
-  for (int i=0; i <= N; i++) {
-    x0 = a + i*h;
-    x1 = x0 + h;
-    
-    stepForward += basicClosedNewtonCotesDegree1(function, x0, x1);
-  }
-
-  // If the initial number of partitions don't work, increase then until the tolerance as reached
-  while (fabs(step - stepForward) > tolerance) {
-    // Increasing the number of partitions
-    N *= 10;
-    h = (b-a)/N;
-    
-    // Setting the steps
-    step = stepForward;
-    stepForward = 0;
-
-    for (int i=0; i <= N; i++) {
-      x0 = a + i*h;
-      x1 = x0 + h;
-      
-      stepForward += basicClosedNewtonCotesDegree1(function, x0, x1);
+      sum += basicClosedNewtonCotesDegree1(function, x0, x1);
     }
-  }
 
-  // Returning the correct answer
-  return stepForward;
+    anterior = current;
+    current = sum;
+  }
+  
+  return current;
 }
 
 // Degree 2
 double NewtonCotes::closedToleranceNewtonCotesDegree2(Function function, double a, double b, double tolerance)
 {
-  double step, stepForward, aux, h, delta, x0, x1;
-  int N;
+  double current, anterior, sum, delta, x0, x1;
   
-  // Initial value of partitions
-  abs(log(tolerance)/log(10)) < 1 ? N = 10 : N = pow(10, abs(log(tolerance)/log(10)));
-  h = (b-a)/N;
+  current = 0.1;
+  anterior = 100;
 
-  // Calculate the first step
-  step = 0;
-  for (int i=0; i <= N; i++) {
-    x0 = a + i*h;
-    x1 = x0 + h;
+  // Initial number of partitions
+  int N = 1;
+  
+  while (fabs((current - anterior)/current) > tolerance) {
+    N *= 2;
+    sum = 0;
+    delta = (b-a)/N;
 
-    step += basicClosedNewtonCotesDegree2(function, x0, x1);
-  }
+    for (int i=0; i < N; i++) {
+      x0 = a + i*delta;
+      x1 = x0 + delta;
 
-  // Increasing the number of partitions
-  N *= 10;
-  h = (b-a)/N;
-
-  // Calculate the second step
-  stepForward = 0;
-  for (int i=0; i <= N; i++) {
-    x0 = a + i*h;
-    x1 = x0 + h;
-    
-    stepForward += basicClosedNewtonCotesDegree2(function, x0, x1);
-  }
-
-  // If the initial number of partitions don't work, increase then until the tolerance as reached
-  while (fabs(step - stepForward) > tolerance) {
-    // Increasing the number of partitions
-    N *= 10;
-    h = (b-a)/N;
-    
-    // Setting the steps
-    step = stepForward;
-    stepForward = 0;
-
-    for (int i=0; i <= N; i++) {
-      x0 = a + i*h;
-      x1 = x0 + h;
-      
-      stepForward += basicClosedNewtonCotesDegree2(function, x0, x1);
+      sum += basicClosedNewtonCotesDegree2(function, x0, x1);
     }
-  }
 
-  // Returning the correct answer
-  return stepForward;
+    anterior = current;
+    current = sum;
+  }
+  
+  return current;
 }
 
 // Degree 3
 double NewtonCotes::closedToleranceNewtonCotesDegree3(Function function, double a, double b, double tolerance)
 {
-  double step, stepForward, aux, h, x0, x1;
-  int N;
+  double current, anterior, sum, delta, x0, x1;
   
-  // Initial value of partitions
-  abs(log(tolerance)/log(10)) < 1 ? N = 10 : N = pow(10, abs(log(tolerance)/log(10)));
-  h = (b-a)/N;
+  current = 0.1;
+  anterior = 100;
 
-  // Calculate the first step
-  step = 0;
-  for (int i=0; i <= N; i++) {
-    x0 = a + i*h;
-    x1 = x0 + h;
+  // Initial number of partitions
+  int N = 1;
+  
+  while (fabs((current - anterior)/current) > tolerance) {
+    N *= 2;
+    sum = 0;
+    delta = (b-a)/N;
 
-    step += basicClosedNewtonCotesDegree3(function, x0, x1);
-  }
+    for (int i=0; i < N; i++) {
+      x0 = a + i*delta;
+      x1 = x0 + delta;
 
-  // Increasing the number of partitions
-  N *= 10;
-  h = (b-a)/N;
-
-  // Calculate the second step
-  stepForward = 0;
-  for (int i=0; i <= N; i++) {
-    x0 = a + i*h;
-    x1 = x0 + h;
-    
-    stepForward += basicClosedNewtonCotesDegree3(function, x0, x1);
-  }
-
-  // If the initial number of partitions don't work, increase then until the tolerance as reached
-  while (fabs(step - stepForward) > tolerance) {
-    // Increasing the number of partitions
-    N *= 10;
-    h = (b-a)/N;
-    
-    // Setting the steps
-    step = stepForward;
-    stepForward = 0;
-
-    for (int i=0; i <= N; i++) {
-      x0 = a + i*h;
-      x1 = x0 + h;
-      
-      stepForward += basicClosedNewtonCotesDegree3(function, x0, x1);
+      sum += basicClosedNewtonCotesDegree3(function, x0, x1);
     }
-  }
 
-  // Returning the correct answer
-  return stepForward;
+    anterior = current;
+    current = sum;
+  }
+  
+  return current;
 }
 
 // Degree 4
 double NewtonCotes::closedToleranceNewtonCotesDegree4(Function function, double a, double b, double tolerance)
 {
-  double step, stepForward, aux, h, delta, x0, x1;
-  int N;
+  double current, anterior, sum, delta, x0, x1;
   
-  // Initial value of partitions
-  abs(log(tolerance)/log(10)) < 1 ? N = 10 : N = pow(10, abs(log(tolerance)/log(10)));
-  h = (b-a)/N;
+  current = 0.1;
+  anterior = 100;
 
-  // Calculate the first step
-  step = 0;
-  for (int i=0; i <= N; i++) {
-    x0 = a + i*h;
-    x1 = x0 + h;
+  // Initial number of partitions
+  int N = 1;
+  
+  while (fabs((current - anterior)/current) > tolerance) {
+    N *= 2;
+    sum = 0;
+    delta = (b-a)/N;
 
-    step += basicClosedNewtonCotesDegree4(function, x0, x1);
-  }
+    for (int i=0; i < N; i++) {
+      x0 = a + i*delta;
+      x1 = x0 + delta;
 
-  // Increasing the number of partitions
-  N *= 10;
-  h = (b-a)/N;
-
-  // Calculate the second step
-  stepForward = 0;
-  for (int i=0; i <= N; i++) {
-    x0 = a + i*h;
-    x1 = x0 + h;
-    
-    stepForward += basicClosedNewtonCotesDegree4(function, x0, x1);
-  }
-
-  // If the initial number of partitions don't work, increase then until the tolerance as reached
-  while (fabs(step - stepForward) > tolerance) {
-    // Increasing the number of partitions
-    N *= 10;
-    h = (b-a)/N;
-    
-    // Setting the steps
-    step = stepForward;
-    stepForward = 0;
-
-    for (int i=0; i <= N; i++) {
-      x0 = a + i*h;
-      x1 = x0 + h;
-      
-      stepForward += basicClosedNewtonCotesDegree4(function, x0, x1);
+      sum += basicClosedNewtonCotesDegree4(function, x0, x1);
     }
+
+    anterior = current;
+    current = sum;
   }
-
-  // Returning the correct answer
-  return stepForward;
+  
+  return current;
 }
-

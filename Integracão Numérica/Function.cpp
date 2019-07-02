@@ -12,24 +12,24 @@ double Function::f(double x)
   // return (30*pow(x, 4) + 25*pow(x, 3) - 3);
 
   // Resultado esperado: 1.640533 no intervalo 0, 0.8
-  return 0.2 + 25 * x - 200 * pow(x, 2) + 675 * pow(x, 3) - 900 * pow(x, 4) + 400 * pow(x, 5);
+  return sqrt(4 - pow(x,2));
 }
 
 double Function::hermiteType(double x)
 {
   // (e^(-x²))*f(x)
-  return pow(exp(1.0), pow(-x, 2));
+  return pow(exp(1.0), x);
 }
 
 double Function::laguerreType(double x)
 {
   // (e^(-x))*f(x)
-  return pow(exp(1.0), -x);
+  return sin(x);
 }
 
 double Function::chebyshevType(double x)
 {
   // (1/sqrt(1.0 - pow(x, 2.0)))
   // f(x)/((1-x²)^1/2), with f(x) = x²
-  return 3*pow(x, 2.0);
+  return cos(x);
 }

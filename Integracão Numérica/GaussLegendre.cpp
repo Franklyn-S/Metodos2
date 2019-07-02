@@ -5,6 +5,7 @@
 
 #define _USE_MATH_DEFINES
 
+// Basic Operations
 // 2 Points
 double GaussLegendre::gaussLegendre2Points(Function function, double a, double b)
 {
@@ -78,3 +79,94 @@ double GaussLegendre::gaussLegendre4Points(Function function, double a, double b
   // Result
   return (w1*function.f(p1) + w2*function.f(p2) + w3*function.f(p3) + w4*function.f(p4))*a1;
 }
+
+// 2 Points
+double GaussLegendre::gaussLegendreTolerance2Points(Function function, double a, double b, double tolerance)
+{
+  double current, anterior, sum, delta, x0, x1;
+  
+  current = 0.1;
+  anterior = 100;
+
+  // Initial number of partitions
+  int N = 1;
+  
+  while (fabs((current - anterior)/current) > tolerance) {
+    N *= 2;
+    sum = 0;
+    delta = (b-a)/N;
+
+    for (int i=0; i < N; i++) {
+      x0 = a + i*delta;
+      x1 = x0 + delta;
+
+      sum += gaussLegendre2Points(function, x0, x1);
+    }
+
+    anterior = current;
+    current = sum;
+  }
+  
+  return current;
+}
+
+// 3 Points
+double GaussLegendre::gaussLegendreTolerance3Points(Function function, double a, double b, double tolerance)
+{
+  double current, anterior, sum, delta, x0, x1;
+  
+  current = 0.1;
+  anterior = 100;
+
+  // Initial number of partitions
+  int N = 1;
+  
+  while (fabs((current - anterior)/current) > tolerance) {
+    N *= 2;
+    sum = 0;
+    delta = (b-a)/N;
+
+    for (int i=0; i < N; i++) {
+      x0 = a + i*delta;
+      x1 = x0 + delta;
+
+      sum += gaussLegendre3Points(function, x0, x1);
+    }
+
+    anterior = current;
+    current = sum;
+  }
+  
+  return current;
+}
+
+// 4 Points
+double GaussLegendre::gaussLegendreTolerance4Points(Function function, double a, double b, double tolerance)
+{
+  double current, anterior, sum, delta, x0, x1;
+  
+  current = 0.1;
+  anterior = 100;
+
+  // Initial number of partitions
+  int N = 1;
+  
+  while (fabs((current - anterior)/current) > tolerance) {
+    N *= 2;
+    sum = 0;
+    delta = (b-a)/N;
+
+    for (int i=0; i < N; i++) {
+      x0 = a + i*delta;
+      x1 = x0 + delta;
+
+      sum += gaussLegendre4Points(function, x0, x1);
+    }
+
+    anterior = current;
+    current = sum;
+  }
+  
+  return current;
+}
+
