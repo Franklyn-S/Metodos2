@@ -3,10 +3,13 @@
 
 using namespace std;
 
+//Compilação g++ 2Q.cpp LU.cpp PVC.cpp -o 2Q 
+//Execução ./2Q
+
 int main(void){
     
     VectorXf matricula(6);
-    matricula << 4,3,3,3,8,3;
+    matricula << 3,9,9,6,8,3;
     int A=matricula[0],B=matricula[1],C=matricula[2],D=matricula[3],E=matricula[4],F=matricula[5];
     
     //Numero de Particoes
