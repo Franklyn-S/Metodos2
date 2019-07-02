@@ -5,67 +5,56 @@
 
 int main(){
 
-	VectorXd matricula(6);
-	matricula << 3,9,7,8,4,7;
-
+	VectorXd M(6);
+	M << 3,9,7,8,4,7;
+	
 	// Matriz Arbitrária da Questão 2
 	MatrixXd A(5,5);
 	A << 
-		30+matricula(0)+matricula(5), matricula(0), matricula(1), matricula(2), matricula(3),
-		matricula(0), 10+matricula(1)+matricula(4), matricula(4), matricula(5), matricula(0)+matricula(1),
-		matricula(1), matricula(4), 50+matricula(2)+matricula(3), matricula(1)+matricula(2), matricula(2)+matricula(3),
-		matricula(2), matricula(5), matricula(1)+matricula(2), 40-matricula(0), matricula(3)+matricula(4),
-		matricula(3), matricula(0)+matricula(1), matricula(2)+matricula(3), matricula(3)+matricula(4), 60-matricula(1);
+		M(0)+M(5)+30	, M(0)			, M(1)			, 	M(2)		, M(3),
+		M(0)			, M(1)+M(4)+10	, M(4)			, 	M(5)		, M(0)+M(1),
+		M(1)			, M(4)			, M(2)+M(3)+50	, 	M(1)+M(2)	, M(2)+M(3),
+		M(2)			, M(5)			, M(1)+M(2)		,  -M(0)+40		, M(3)+M(4),
+		M(3)			, M(0)+M(1)		, M(2)+M(3)		, 	M(3)+M(4)	,-M(1)+60;
 
-
-	// Matriz Arbitrária da Questão 3
+	
 	/*
+	// Matriz Arbitrária da Questão 3
+	
 	MatrixXd A(3,5);
 	A << 
-		30+matricula(0)+matricula(5), matricula(0), matricula(1), matricula(2), matricula(3),
-		matricula(0), 10+matricula(1)+matricula(4), matricula(4), matricula(5), matricula(0)+matricula(1),
-		matricula(1), matricula(4), 50+matricula(2)+matricula(3), matricula(1)+matricula(2), matricula(2)+matricula(3);
+		M(0)+M(5)+30	, M(0)			, M(1)			, 	M(2)		, M(3),
+		M(0)			, M(1)+M(4)+10	, M(4)			, 	M(5)		, M(0)+M(1),
+		M(1)			, M(4)			, M(2)+M(3)+50	, 	M(1)+M(2)	, M(2)+M(3);
 
 	*/
 
-/*	
-	//Matricula Daniel
-	MatrixXd A(5, 5);
-	A <<
-	 		42, 3, 7, 4, 1,
-        	3, 23, 6, 9, 10,
-        	7, 6, 55, 11, 5,
-        	4, 9, 11, 37, 7,
-        	1, 10, 5, 7, 53;
+	/*
 
-/*
-	// Matricula Franklyn
 	MatrixXd A(3, 5);
 	A <<
-	 		40, 3, 9, 7, 8,
-		 	3, 23, 4, 7, 12,
-		 	9, 4, 65, 16, 15;
-*/	
+	 	40, 3, 9, 7, 8,
+		3, 23, 4, 7, 12,
+		9, 4, 65, 16, 15;
+
+	*/
 
 
 	//Erro
-	double E = 0.001;
+	double E = 0.000001;
 
-	int rows = 5;
-	int cols = 5;
+	int rows = A.rows();
+	int cols = A.cols();
 	
 	//--------------------------- Achar Matriz U pelo Metodo de Jacobi ------------------------------------
-	MatrixXd A_U(rows, cols);
-	MatrixXd H_U(rows, cols);
-	MatrixXd It_U(rows, cols);
-	MatrixXd valueU(rows, cols);
-	MatrixXd vectorU(rows, cols);
+	MatrixXd A_U(rows, rows);
+	MatrixXd H_U(rows, rows);
+	MatrixXd It_U(rows, rows);
+	MatrixXd valueU(rows, rows);
+	MatrixXd vectorU(rows, rows);
 
 	A_U = A*A.transpose();
 	tie(It_U,H_U) = HouseHolder(A_U);
-
-	// QR = 0 | Jacobi = 1
-	bool metodoU = 1;
 	tie(valueU, vectorU) = jacobi(It_U, E, H_U);
 
 	around(It_U);
@@ -87,17 +76,14 @@ int main(){
 	
 
 	//------------------------------- Achar Matriz V pelo Metodo QR ------------------------------------
-	MatrixXd A_V(rows, cols);
-	MatrixXd H_V(rows, cols);
-	MatrixXd It_V(rows, cols);
-	MatrixXd valueV(rows, cols);
-	MatrixXd vectorV(rows, cols);
+	MatrixXd A_V(cols, cols);
+	MatrixXd H_V(cols, cols);
+	MatrixXd It_V(cols, cols);
+	MatrixXd valueV(cols, cols);
+	MatrixXd vectorV(cols, cols);
 	
 	A_V = A.transpose()*A;
 	tie(It_V,H_V) = HouseHolder(A_V);
-
-	// QR = 0 | Jacobi = 1
-	bool metodoV = 0;
 	tie(valueV, vectorV) = QR(It_V, E, H_V);
 	
 	around(It_V);
@@ -109,38 +95,30 @@ int main(){
 
 
 	cout << "\n" <<"---------------------------------- Metodo QR ---------------------------------- " << "\n" << endl;
-	cout << "Matriz A_transposta*A" << endl << A_U.format(CleanFmt) << "\n" << endl;
+	cout << "Matriz A_transposta*A" << endl << A_V.format(CleanFmt) << "\n" << endl;
 	cout << "Matriz Tridiagonal" << endl << It_V.format(CleanFmt) << "\n" << endl;
 	cout << "Matriz Acumulada" << endl << H_V.format(CleanFmt) << "\n" << endl;
 	cout << "Matriz de Autovalores: "<< endl << valueV.format(CleanFmt) << "\n" << endl;
 	cout << "Matriz de Autovetores: " << endl << vectorV.format(CleanFmt) << "\n" << endl;
 
 
-	//---------------------------------------- SIGMA QUESTÃO 2 ------------------------------------
-	
-/*
-	MatrixXd Sigma(rows, cols);
-	Sigma = valueU;
-	
-	igualarSinal(vectorU, vectorV);
-*/
-
-	//---------------------------------------- SIGMA QUESTÃO 3------------------------------------
-	
-
-	MatrixXd Sigma(3, 5);
-	Sigma = MatrixXd::Zero(3,5);
-	for (int i = 0; i < 3; i++) 
-		Sigma(i,i) = valueU(i,i);
-
-    inverteSinal(vectorU,vectorV,metodoU,metodoV);
-
 
 	//------------------------------------------- RESULTADO ---------------------------------------
+	
 
+	// Sigma
+	MatrixXd Sigma(rows, cols);
+	Sigma = MatrixXd::Zero(rows,cols);
+	for (int i = 0; i < rows; i++) 
+		Sigma(i,i) = valueU(i,i);
     sqrt_diagonal(Sigma);
+
+    consertaSinal(A, vectorV, vectorU, Sigma);
+
+    // U * Σ * Vt
     MatrixXd aux(rows, cols);
     aux = vectorU*Sigma*vectorV.transpose();
+    around(aux);
 
 	cout << "\n" <<"---------------------------------- RESULTADO ---------------------------------- " << "\n" << endl;
 	
@@ -149,6 +127,7 @@ int main(){
 	cout << "Matriz V: " << endl << vectorV.format(CleanFmt) << "\n" << endl;
 	cout << "Matriz A: " << endl << A.format(CleanFmt) << "\n" << endl;
 	cout << "Matriz U*Σ*(V^t): " << endl << aux.format(CleanFmt) << "\n" << endl;
+
 
 
 	//----------------------------------------- Outras Provas -----------------------------------

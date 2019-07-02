@@ -105,7 +105,7 @@ void ordenar(Ref<MatrixXd> Matriz_Valor, Ref<MatrixXd> Matriz_Vetor){
 	for (int i = 0; i < rows; i++){
 		for (int j = 0; j < cols; j++){
 			
-			EigenVectorMatriz(i,j) =	Matriz_Vetor(i, vetor_indice(j));
+			EigenVectorMatriz(i,j) = Matriz_Vetor(i, vetor_indice(j));
 			EigenValueMatriz(i,j) =	Matriz_Valor(i, vetor_indice(j));
 
 		}	
@@ -133,12 +133,11 @@ void sqrt_diagonal(Ref<MatrixXd> M){
 	}
 }
 
-void igualarSinal(Ref<MatrixXd> MatrizA, Ref<MatrixXd> MatrizB){
-
-	for (int i = 0; i < MatrizA.cols(); i++){
-		if ((MatrizA(i,i) < 0 and MatrizB(i,i) > 0) or (MatrizA(i,i) > 0 and MatrizB(i,i) < 0) ){
-			for (int j = 0; j < MatrizA.rows(); j++){
-				MatrizB(j,i) = -1 * MatrizB(j,i);	
+void inverteSinal(Ref<MatrixXd> MatrizA, int coluna){
+	for (int i = 0; i < MatrizA.rows(); i++){
+		if (i == coluna){
+			for (int j = 0; j < MatrizA.cols(); j++){
+				MatrizA(j,i) = -1 * MatrizA(j,i);	
 			}
 		}
 	}
@@ -146,42 +145,22 @@ void igualarSinal(Ref<MatrixXd> MatrizA, Ref<MatrixXd> MatrizB){
 }
 
 
-void inverteSinal(Ref<MatrixXd> vectorU, Ref<MatrixXd> vectorV,bool metodoU,bool metodoV){
+void consertaSinal(Ref<MatrixXd> A, Ref<MatrixXd> V, Ref<MatrixXd> U, Ref<MatrixXd> S){
+	MatrixXd AV = A * V;
+	MatrixXd US = U * S;
+	bool inverter = false;
 
-	int coluna;
-	if (metodoU) coluna = 1;
-	else coluna = 0;
-
-	for (int i = 0; i < vectorU.cols(); i++){
-		if (i == coluna){
-			for (int j = 0; j < vectorU.rows(); j++){
-				vectorU(j,i) = -1 * vectorU(j,i);	
+	for (int j = 0; j < AV.cols(); j++){
+		for (int i = 0; i < AV.rows(); i++){
+			if (fabs( AV(i, j) - US(i, j) ) > 1) {
+				inverter = true;
 			}
 		}
-	}
 
-
-	if (metodoV) coluna = 1;
-    else coluna = 0;
-
-    for (int i = 0; i < vectorV.cols(); i++){
-		if (i == coluna){
-			for (int j = 0; j < vectorV.rows(); j++){
-				vectorV(j,i) = -1 * vectorV(j,i);	
-			}
+		if (inverter) {
+			if (j >= U.rows()) inverteSinal(V, j);
+			else inverteSinal(U, j);	
+			inverter = false;
 		}
 	}
-
-
-	coluna = 2;
-
- 	for (int i = 0; i < vectorV.cols(); i++){
-		if (i == coluna){
-			for (int j = 0; j < vectorV.rows(); j++){
-				vectorV(j,i) = -1 * vectorV(j,i);	
-			}
-		}
-	}
-
 }
-
