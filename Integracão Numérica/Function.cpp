@@ -17,19 +17,18 @@ double Function::f(double x)
 
 double Function::hermiteType(double x)
 {
-  // (e^(-x²))*f(x)
+  // Assinatura = (e^(-x²))*f(x)
   return pow(exp(1.0), x);
 }
 
 double Function::laguerreType(double x)
 {
-  // (e^(-x))*f(x)
+  // Assinatura = (e^(-x))*f(x)
   return sin(x);
 }
 
 double Function::chebyshevType(double x)
 {
-  // (1/sqrt(1.0 - pow(x, 2.0)))
-  // f(x)/((1-x²)^1/2), with f(x) = x²
+  // Assinatura = (1/sqrt(1.0 - pow(x, 2.0)))
   return cos(x);
 }
